@@ -1,0 +1,25 @@
+{
+  "name": "project-01",
+  "version": "1.0.0",
+  "description": "A wardrobe app that suggests an outfit based on weather conditions",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melicarls/project-01.git"
+  },
+  "author": "melicarls",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melicarls/project-01/issues"
+  },
+  "homepage": "https://github.com/melicarls/project-01#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.11"
+  }
+}

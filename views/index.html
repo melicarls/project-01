@@ -7,23 +7,22 @@
     <title>Clothe me!</title>
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/styles/styles.css">
 
     <!-- VENDOR SCRIPTS -->
-    <script src="vendor/jQuery/dist/jquery.min.js"></script>
-    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="vendor/handlebars/handlebars.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
-    <script src="scripts/app.js"></script>
+    <script src="../public/scripts/app.js"></script>
 
   </head>
   <body>
 
     <div id="temperature" class="col-md-4">
-      <h3> Today's temperature will be: </h3>
-      <h3> with clear skies and no wind. </h3>
+      <h3> Today's weather will be: </h3>
+      <p id="weatherText"></p>
     </div>
 
     <div id="avatar" class="col-md-4">
@@ -32,6 +31,10 @@
 
     <div id="wardrobe" class="col-md-4">
       <h2>Wardrobe placeholder</h2>
+    </div>
+
+    <div id="footer" class="col-md-12">
+      <img src="../public/images/wulogo.png" class="logo">
     </div>
 
   </body>

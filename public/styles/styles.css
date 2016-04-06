@@ -1,0 +1,16 @@
+#temperature {
+  background: pink;
+}
+
+#avatar {
+  background: lightgreen;
+}
+
+#wardrobe {
+  background: lightblue;
+}
+
+.logo {
+  width: 100px;
+  margin-left: 80%;
+}
