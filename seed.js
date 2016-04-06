@@ -111,6 +111,7 @@ var sampleWardrobe = [
 testUser.wardrobe = sampleWardrobe;
 
 db.User.remove({}, function(err, users){
+  
   db.User.create(testUser, function(err, user){
     if (err) {return console.log("Seed user error", err);}
     console.log("All users:", users);

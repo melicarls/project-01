@@ -15,6 +15,8 @@ app.get('/', function homepage (req, res) {
 
 //JSON API Endpoints
 
+//API
+app.get('/api', controller.api.index);
 
 // listen on port 3000
 app.listen(process.env.PORT || 3000, function () {
