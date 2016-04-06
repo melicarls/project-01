@@ -8,14 +8,14 @@
 
     <!-- STYLESHEETS -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/styles/styles.css">
+    <link rel="stylesheet" href="/styles/styles.css">
 
     <!-- VENDOR SCRIPTS -->
     <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
-    <script src="../public/scripts/app.js"></script>
+    <script src="./scripts/app.js"></script>
 
   </head>
   <body>
@@ -23,18 +23,32 @@
     <div id="temperature" class="col-md-4">
       <h3> Today's weather will be: </h3>
       <p id="weatherText"></p>
+      <button type="button" class="btn btn-primary btn-lg">Dress Me!</button>
     </div>
 
-    <div id="avatar" class="col-md-4">
-      <h2>Avatar placeholder</h2>
-    </div>
+<!--Start Handlebars-->
+    <div id="userTarget">
+      <script id = "user-template" type="text/x-handlebars-template">
 
-    <div id="wardrobe" class="col-md-4">
-      <h2>Wardrobe placeholder</h2>
+        <div id="avatar" class="col-md-4">
+          <h2>Your Outfit:</h2>
+          <div id="topTarget"></div>
+          <div id="bottomTarget"></div>
+          <div id="fullTarget"></div>
+        </div>
+
+        <div id="wardrobe" class="col-md-4">
+          <h2>Wardrobe</h2>
+          <div id="tops"><h4>Tops</h4></div>
+          <div id="bottoms"><h4>Bottoms</h4></div>
+          <div id="fullBody"><h4>Full Body</h4></div>
+        </div>
+      </script>
     </div>
+<!--End Handlebars-->
 
     <div id="footer" class="col-md-12">
-      <img src="../public/images/wulogo.png" class="logo">
+      <img src="/images/wulogo.png" class="logo">
     </div>
 
   </body>

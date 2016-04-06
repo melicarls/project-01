@@ -3,6 +3,7 @@
 //
 // var ItemSchema = new Schema ({
 //   description: String,
+//   category: String,
 //   color: String,
 //   type: String,
 //   url: String,

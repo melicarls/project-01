@@ -13,3 +13,6 @@
 // module.exports = User;
 
 //Code done
+
+
+//Change wardrobe to an object containing 3 arrays: tops, bottoms, and full body
