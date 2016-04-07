@@ -1,9 +1,10 @@
 var weatherEndpoint = "http://api.wunderground.com/api/4fefd5989e452ef5/forecast/q/CA/San_Francisco.json";
 var template;
-var todayTemp;
-var isWindy;
-var isRainy;
-var userId = "5706a2259d5786e10095ff0f";
+var feelsLike;
+var isWindy=false;
+var isRainy=false;
+var userId="5706c9a76bb06a880d22606c";
+var userWardrobe;
 
 $(document).ready(function() {
   console.log('app.js loaded!');
@@ -13,7 +14,7 @@ $(document).ready(function() {
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  // getWeather();
+  getWeather();
 
   $.ajax({
     method: "GET",
@@ -28,6 +29,16 @@ $(document).ready(function() {
   });
 
   $('#saveItem').on('click', handleNewItemSubmit);
+
+  $('#randomize').on('click', function(e) {
+    console.log("Clicked Dress Me");
+    console.log(userWardrobe);
+    e.preventDefault();
+    var chosenTop = getRandomForToday(userWardrobe.tops);
+    var chosenBottom = getRandomForToday(userWardrobe.bottoms);
+    $('#chosenTop').html('<h2>' + chosenTop.description + '</h2>');
+    $('#chosenBottom').html('<h2>' + chosenBottom.description + '</h2>');
+  });
 
 });
 
@@ -73,6 +84,12 @@ function newItemSuccess(json) {
   $('#itemColor').val('');
   $('#itemTemp').val('');
   $('#addModal').modal('hide');
+  var toAdd = '<li>' + json.description + '</li>';
+  if (json.category === "Top") {
+    $('#newTop').append(toAdd);
+  } else if (json.category === "Bottom") {
+    $('#newBottom').append(toAdd);
+  }
 }
 
 function newItemError(err) {
@@ -81,7 +98,8 @@ function newItemError(err) {
 
 function handleSuccess(json) {
   console.log(json);
-  renderWardrobe(json.wardrobe);
+  userWardrobe = json.wardrobe;
+  renderWardrobe(userWardrobe);
 }
 
 function handleError() {
@@ -109,6 +127,13 @@ function onWeatherSuccess(json) {
   $('#weatherText').text(json.forecast.txt_forecast.forecastday[0].fcttext);
   $('#weatherIcon').html('<img src=' + json.forecast.txt_forecast.forecastday[0].icon_url + '>');
   todayTemp = parseInt(json.forecast.simpleforecast.forecastday[0].high.fahrenheit);
+  if (todayTemp < 50) {
+    feelsLike = "Cold";
+  } else if (todayTemp > 80) {
+    feelsLike = "Hot";
+  } else {
+    feelsLike = "Mild";
+  }
   var todayWind = json.forecast.simpleforecast.forecastday[0].avewind.mph;
   if (todayWind > 12) {
     isWindy = true;
@@ -117,11 +142,23 @@ function onWeatherSuccess(json) {
   if (todayRain > 30) {
     isRainy = true;
   }
-  console.log("Today temp", todayTemp);
-  console.log("Today wind", todayWind);
-  console.log("Today rain", todayRain);
+  console.log("Today tempRange", feelsLike);
+  console.log("Today isWindy", isWindy);
+  console.log("Today isRainy", isRainy);
 }
 
 function onWeatherError() {
   console.log("Something went wrong. The weather could not be retrieved");
+}
+
+function getRandomForToday(clothesArr) {
+  console.log(clothesArr);
+  var weatherAppropriate = [];
+  clothesArr.forEach(function (el, i, arr) {
+    if ((el.temp === feelsLike) && (el.inWind === isWindy) && (el.inRain === isRainy)) {
+      weatherAppropriate.push(el);
+    }
+  });
+  var thisOne = (parseInt(Math.random(0, weatherAppropriate.length)));
+  return weatherAppropriate[thisOne];
 }

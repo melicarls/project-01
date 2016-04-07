@@ -26,7 +26,7 @@
       <h4 id="weatherText"></h4>
       <div id="weatherIcon" class="col-md-4">
       </div>
-      <button type="button" class="btn btn-primary btn-lg">Dress Me!</button>
+      <button type="button" id="randomize" class="btn btn-primary btn-lg">Dress Me!</button>
     </div>
 
 
@@ -42,12 +42,12 @@
       <div id="wardrobeTarget">
         <script id = "wardrobe-template" type="text/x-handlebars-template">
           <div id="tops"><h4>Tops</h4>
-            <ul>
+            <ul id="newTop">
             {{#each tops}}<li>{{description}}</li>{{/each}}
             </ul>
           </div>
           <div id="bottoms"><h4>Bottoms</h4>
-            <ul>
+            <ul id="newBottom">
             {{#each bottoms}}<li>{{description}}</li>{{/each}}
             </ul>
           </div>
@@ -80,8 +80,8 @@
               <div class="form-group">
                 <label class="control-label" for="itemCategory">Item category:</label>
                 <select class="form-control" id="itemCategory" required>
-                  <option>Tops</option>
-                  <option>Bottoms</option>
+                  <option>Top</option>
+                  <option>Bottom</option>
                 </select>
               </div>
 
