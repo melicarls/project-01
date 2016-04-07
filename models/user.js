@@ -9,7 +9,6 @@ var UserSchema = new Schema ({
   wardrobe: {
     tops: [ Item.schema ],
     bottoms: [ Item.schema ],
-    fullBody: [Item.schema]
   }
 });
 

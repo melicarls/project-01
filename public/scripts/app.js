@@ -1,6 +1,9 @@
 var weatherEndpoint = "http://api.wunderground.com/api/4fefd5989e452ef5/forecast/q/CA/San_Francisco.json";
 var template;
-
+var todayTemp;
+var isWindy;
+var isRainy;
+var userId = "5706a2259d5786e10095ff0f";
 
 $(document).ready(function() {
   console.log('app.js loaded!');
@@ -10,9 +13,7 @@ $(document).ready(function() {
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  getWeather();
-
-  var userId = "57069c794d890ac5841b1c4c";
+  // getWeather();
 
   $.ajax({
     method: "GET",
@@ -26,7 +27,57 @@ $(document).ready(function() {
     $('#addModal').modal('show');
   });
 
+  $('#saveItem').on('click', handleNewItemSubmit);
+
 });
+
+function handleNewItemSubmit(e) {
+  console.log("New item submit triggered");
+  e.preventDefault();
+  //Manually set variables for all new item values
+  var newDescription = $('#itemDescription').val();
+  var newCategory = $('#itemCategory').val();
+  var newColor = $('#itemColor').val();
+  var newTemp = $('#itemTemp').val();
+  if ($('#inRain').is(':checked')) {
+    newRain = true;
+  } else {
+    newRain = false;
+  }
+  if ($('#inWind').is(':checked')) {
+    newWind = true;
+  } else {
+    newWind = false;
+  }
+  thisUrl = '/api/users/' + userId + '/items';
+  $.ajax ({
+    method: 'POST',
+    url: thisUrl,
+    data: {
+      description: newDescription,
+      category: newCategory,
+      color: newColor,
+      temp: newTemp,
+      inWind: newWind,
+      inRain: newRain,
+    },
+    success: newItemSuccess,
+    error: newItemError,
+  });
+}
+
+function newItemSuccess(json) {
+  console.log("Got this data from POST route", json);
+  $('#itemDescription').val('');
+  $('#itemCategory').val('');
+  $('#itemColor').val('');
+  $('#itemTemp').val('');
+  $('#addModal').modal('hide');
+}
+
+function newItemError(err) {
+  console.log("Post request returned this error: ", err);
+}
 
 function handleSuccess(json) {
   console.log(json);
@@ -39,8 +90,6 @@ function handleError() {
 
 function renderWardrobe(wardrobeArray) {
   console.log("Adding clothes");
-  //Add clothing to wardrobe section of page
-  //Display them using for each
   var wardrobeHtml = $('#wardrobe-template').html();
   var wardrobeTemplate = Handlebars.compile(wardrobeHtml);
   var html = wardrobeTemplate(wardrobeArray);
@@ -57,8 +106,20 @@ function getWeather() {$.ajax({
 
 function onWeatherSuccess(json) {
   console.log("onSuccess was called because we got weather from WU");
-  console.log(json);
   $('#weatherText').text(json.forecast.txt_forecast.forecastday[0].fcttext);
+  $('#weatherIcon').html('<img src=' + json.forecast.txt_forecast.forecastday[0].icon_url + '>');
+  todayTemp = parseInt(json.forecast.simpleforecast.forecastday[0].high.fahrenheit);
+  var todayWind = json.forecast.simpleforecast.forecastday[0].avewind.mph;
+  if (todayWind > 12) {
+    isWindy = true;
+  }
+  var todayRain = json.forecast.simpleforecast.forecastday[0].pop;
+  if (todayRain > 30) {
+    isRainy = true;
+  }
+  console.log("Today temp", todayTemp);
+  console.log("Today wind", todayWind);
+  console.log("Today rain", todayRain);
 }
 
 function onWeatherError() {

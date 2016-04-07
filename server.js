@@ -22,7 +22,7 @@ app.get('/api', controllers.api.index);
 app.get('/api/users/:user_id', controllers.users.show);
 
 //CRUD wardrobe
-
+app.post('/api/users/:user_id/items', controllers.items.create);
 
 // listen on port 3000
 app.listen(process.env.PORT || 3000, function () {

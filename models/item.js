@@ -7,8 +7,7 @@ var ItemSchema = new Schema ({
   color: String,
   type: String,
   url: String,
-  minTemp: Number,
-  maxTemp: Number,
+  temp: String,
   inWind: Boolean,
   inRain: Boolean,
 });

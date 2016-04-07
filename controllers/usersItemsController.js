@@ -10,12 +10,16 @@ function create(req, res) {
       res.status(404).json({error: err.message});
     }
     var newItem = new db.Item(req.body);
-    foundUser.wardrobe.push(newItem);
+    if (newItem.category === "Top") {
+      foundUser.wardrobe.tops.push(newItem);
+    } else if (newItem.category === "Bottom") {
+      foundUser.wardrobe.bottoms.push(newItem);
+    }
     foundUser.save(function(err, savedItem){
       if (err) {
         return console.log("Save error:", err);
       }
-      res.json(savedUser);
+      res.json(newItem);
     });
   });
 }

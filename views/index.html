@@ -24,15 +24,16 @@
     <div id="temperature" class="col-md-4">
       <h3> Today's weather will be: </h3>
       <h4 id="weatherText"></h4>
+      <div id="weatherIcon" class="col-md-4">
+      </div>
       <button type="button" class="btn btn-primary btn-lg">Dress Me!</button>
     </div>
 
 
     <div id="avatar" class="col-md-4">
       <h2>Your Outfit:</h2>
-      <div id="topTarget"></div>
-      <div id="bottomTarget"></div>
-      <div id="fullTarget"></div>
+      <div id="chosenTop"></div>
+      <div id="chosenBottom"></div>
     </div>
 
     <div id="wardrobe" class="col-md-4">
@@ -50,17 +51,11 @@
             {{#each bottoms}}<li>{{description}}</li>{{/each}}
             </ul>
           </div>
-          <div id="fullBody"><h4>Full Body</h4>
-            <ul>
-            {{#each fullBody}}<li>{{description}}</li>{{/each}}
-            <ul>
-          </div>
         </script>
       </div>
       <!--End Handlebars-->
       <button class='btn btn-primary add-item'>Add Item</button>
     </div>
-
 
     <!-- begin addModal: this is not visible until you call .modal() on it -->
     <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
@@ -75,26 +70,25 @@
             <fieldset class='form-horizontal'>
               <!-- Text input for description-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="itemDescription">Item Description</label>
-                <div class="col-md-4">
-                  <input id="itemDescription" name="itemDescription" type="text" placeholder="" class="form-control input-md" required="">
+                <label class="control-label" for="itemDescription">Item Description</label>
+                <div>
+                  <input id="itemDescription" name="itemDescription" type="text" placeholder="" class="form-control input-md" required>
                 </div>
               </div>
 
               <!-- Drop down input for item category-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="itemCategory">Item category:</label>
-                <select class="form-control col-md-4" id="itemCategory">
+                <label class="control-label" for="itemCategory">Item category:</label>
+                <select class="form-control" id="itemCategory" required>
                   <option>Tops</option>
                   <option>Bottoms</option>
-                  <option>Full Body</option>
                 </select>
               </div>
 
               <!-- Drop down input for item color-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="itemColor">Item color:</label>
-                <select class="form-control col-md-4" id="itemColor">
+                <label class="control-label" for="itemColor">Item color:</label>
+                <select class="form-control" id="itemColor" required>
                   <option>Red</option>
                   <option>Orange</option>
                   <option>Yellow</option>
@@ -109,33 +103,29 @@
 
               <!-- Add one for the silhouette that depends on itemCat form-->
 
-              <!-- Text input for min temp-->
+              <!-- Drop down input for weather range-->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="minTemp">Minimum temperature:</label>
-                <div class="col-md-4">
-                  <input id="minTemp" name="minTemp" type="text" placeholder="" class="form-control input-md col-md-4" required="">
-                </div>
-              </div>
-
-              <!-- Text input for max temp-->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="maxTemp">Maximum temperature:</label>
-                <div class="col-md-4">
-                  <input id="maxTemp" name="maxTemp" type="text" placeholder="" class="form-control input-md col-md-4" required="">
-                </div>
+                <label class="control-label" for="itemTemp">Temperature:</label>
+                <select class="form-control" id="itemTemp" required>
+                  <option>Hot</option>
+                  <option>Mild</option>
+                  <option>Cold</option>
+                </select>
               </div>
 
               <!-- Checkbox for wind-->
               <div class="checkbox">
                 <label class="control-label" for="inWind">
-                  <input id="inWind" name="inWind" type="checkbox" class="form-control"> Wearable in wind?
+                  <input id="inWind" name="inWind" type="checkbox" class="form-control" required>
+                  Wearable in wind?
                 </label>
               </div>
 
               <!-- Checkbox for rain-->
               <div class="checkbox">
                 <label class="control-label" for="inRain">
-                  <input id="inRain" name="inRain" type="checkbox" class="form-control"> Wearable in rain?
+                  <input id="inRain" name="inRain" type="checkbox" class="form-control" required>
+                  Wearable in rain?
                 </label>
               </div>
 
@@ -149,7 +139,6 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
 
     <div id="footer" class="col-md-12">
       <img src="/images/wulogo.png" class="logo">
