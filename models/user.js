@@ -6,7 +6,11 @@ var UserSchema = new Schema ({
   username: String,
   password: String,
   name: String,
-  wardrobe: [ Item.schema ],
+  wardrobe: {
+    tops: [ Item.schema ],
+    bottoms: [ Item.schema ],
+    fullBody: [Item.schema]
+  }
 });
 
 var User = mongoose.model('User', UserSchema);

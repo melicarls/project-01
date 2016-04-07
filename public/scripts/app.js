@@ -10,15 +10,20 @@ $(document).ready(function() {
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  // getWeather(); Commented out so I don't overuse my key
+  getWeather();
 
-  var userId = "5705a6e8d67720f477b4d3cc";
+  var userId = "57069c794d890ac5841b1c4c";
 
   $.ajax({
     method: "GET",
     url: '/api/users/' + userId,
     success: handleSuccess,
     error: handleError,
+  });
+
+  $('.add-item').on('click', function(e) {
+    console.log("clicked add item");
+    $('#addModal').modal('show');
   });
 
 });
@@ -36,6 +41,10 @@ function renderWardrobe(wardrobeArray) {
   console.log("Adding clothes");
   //Add clothing to wardrobe section of page
   //Display them using for each
+  var wardrobeHtml = $('#wardrobe-template').html();
+  var wardrobeTemplate = Handlebars.compile(wardrobeHtml);
+  var html = wardrobeTemplate(wardrobeArray);
+  $('#wardrobeTarget').prepend(html);
 }
 
 function getWeather() {$.ajax({

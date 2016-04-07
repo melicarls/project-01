@@ -12,6 +12,7 @@
 
     <!-- VENDOR SCRIPTS -->
     <script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
@@ -22,30 +23,133 @@
 
     <div id="temperature" class="col-md-4">
       <h3> Today's weather will be: </h3>
-      <p id="weatherText"></p>
+      <h4 id="weatherText"></h4>
       <button type="button" class="btn btn-primary btn-lg">Dress Me!</button>
     </div>
 
 
-        <div id="avatar" class="col-md-4">
-          <h2>Your Outfit:</h2>
-          <div id="topTarget"></div>
-          <div id="bottomTarget"></div>
-          <div id="fullTarget"></div>
-        </div>
-
-    <!--Start Handlebars-->
-    <div id="wardrobeTarget">
-      <script id = "wardrobe-template" type="text/x-handlebars-template">
-        <div id="wardrobe" class="col-md-4">
-          <h2>Wardrobe</h2>
-          <div id="tops"><h4>Tops</h4></div>
-          <div id="bottoms"><h4>Bottoms</h4></div>
-          <div id="fullBody"><h4>Full Body</h4></div>
-        </div>
-      </script>
+    <div id="avatar" class="col-md-4">
+      <h2>Your Outfit:</h2>
+      <div id="topTarget"></div>
+      <div id="bottomTarget"></div>
+      <div id="fullTarget"></div>
     </div>
-<!--End Handlebars-->
+
+    <div id="wardrobe" class="col-md-4">
+      <h2>Wardrobe</h2>
+      <!--Start Handlebars-->
+      <div id="wardrobeTarget">
+        <script id = "wardrobe-template" type="text/x-handlebars-template">
+          <div id="tops"><h4>Tops</h4>
+            <ul>
+            {{#each tops}}<li>{{description}}</li>{{/each}}
+            </ul>
+          </div>
+          <div id="bottoms"><h4>Bottoms</h4>
+            <ul>
+            {{#each bottoms}}<li>{{description}}</li>{{/each}}
+            </ul>
+          </div>
+          <div id="fullBody"><h4>Full Body</h4>
+            <ul>
+            {{#each fullBody}}<li>{{description}}</li>{{/each}}
+            <ul>
+          </div>
+        </script>
+      </div>
+      <!--End Handlebars-->
+      <button class='btn btn-primary add-item'>Add Item</button>
+    </div>
+
+
+    <!-- begin addModal: this is not visible until you call .modal() on it -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Create New Item</h4>
+          </div>
+          <div class="modal-body">
+
+            <fieldset class='form-horizontal'>
+              <!-- Text input for description-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="itemDescription">Item Description</label>
+                <div class="col-md-4">
+                  <input id="itemDescription" name="itemDescription" type="text" placeholder="" class="form-control input-md" required="">
+                </div>
+              </div>
+
+              <!-- Drop down input for item category-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="itemCategory">Item category:</label>
+                <select class="form-control col-md-4" id="itemCategory">
+                  <option>Tops</option>
+                  <option>Bottoms</option>
+                  <option>Full Body</option>
+                </select>
+              </div>
+
+              <!-- Drop down input for item color-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="itemColor">Item color:</label>
+                <select class="form-control col-md-4" id="itemColor">
+                  <option>Red</option>
+                  <option>Orange</option>
+                  <option>Yellow</option>
+                  <option>Green</option>
+                  <option>Blue</option>
+                  <option>Purple</option>
+                  <option>White</option>
+                  <option>Grey</option>
+                  <option>Black</option>
+                </select>
+              </div>
+
+              <!-- Add one for the silhouette that depends on itemCat form-->
+
+              <!-- Text input for min temp-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="minTemp">Minimum temperature:</label>
+                <div class="col-md-4">
+                  <input id="minTemp" name="minTemp" type="text" placeholder="" class="form-control input-md col-md-4" required="">
+                </div>
+              </div>
+
+              <!-- Text input for max temp-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="maxTemp">Maximum temperature:</label>
+                <div class="col-md-4">
+                  <input id="maxTemp" name="maxTemp" type="text" placeholder="" class="form-control input-md col-md-4" required="">
+                </div>
+              </div>
+
+              <!-- Checkbox for wind-->
+              <div class="checkbox">
+                <label class="control-label" for="inWind">
+                  <input id="inWind" name="inWind" type="checkbox" class="form-control"> Wearable in wind?
+                </label>
+              </div>
+
+              <!-- Checkbox for rain-->
+              <div class="checkbox">
+                <label class="control-label" for="inRain">
+                  <input id="inRain" name="inRain" type="checkbox" class="form-control"> Wearable in rain?
+                </label>
+              </div>
+
+            </fieldset>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="saveItem">Save Item</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 
     <div id="footer" class="col-md-12">
       <img src="/images/wulogo.png" class="logo">

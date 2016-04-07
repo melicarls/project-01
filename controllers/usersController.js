@@ -22,10 +22,10 @@ function show(req, res) {
       if (err) {
         res.status(404).json(err.message);
       }
+      console.log("User", foundUser);
       res.json(foundUser);
     });
   console.log("Params", req.params);
-  console.log("Body", req.body);
 }
 
 module.exports = {
