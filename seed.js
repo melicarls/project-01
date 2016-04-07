@@ -1,10 +1,13 @@
 var db = require("./models");
 
-var testUser = {
+var testUsers = [];
+
+testUsers.push({
   username: "test",
   password: "123",
   name: "Tester",
-};
+  wardrobe: [],
+});
 
 var sampleWardrobe = [
   {
@@ -108,11 +111,14 @@ var sampleWardrobe = [
   },
 ];
 
-testUser.wardrobe = sampleWardrobe;
+testUsers.forEach(function(user) {
+  user.wardrobe = sampleWardrobe;
+});
+
 
 db.User.remove({}, function(err, users){
-  
-  db.User.create(testUser, function(err, user){
+
+  db.User.create(testUsers, function(err, users){
     if (err) {return console.log("Seed user error", err);}
     console.log("All users:", users);
     console.log("Created", users.length, "users");

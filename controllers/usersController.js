@@ -1,4 +1,4 @@
-var db = require('..models');
+var db = require('../models');
 var bodyParser = require('body-parser');
 
 function create(req, res) {
@@ -13,3 +13,22 @@ function create(req, res) {
     res.json(savedUser);
   });
 }
+
+function show(req, res) {
+  console.log("Reached show user route");
+  var userId = req.params.user_id;
+  db.User.findById(userId)
+    .exec(function(err, foundUser) {
+      if (err) {
+        res.status(404).json(err.message);
+      }
+      res.json(foundUser);
+    });
+  console.log("Params", req.params);
+  console.log("Body", req.body);
+}
+
+module.exports = {
+  create: create,
+  show: show,
+};

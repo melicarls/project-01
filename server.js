@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// var controllers = require('./controllers');
+var controllers = require('./controllers');
 
 //HTML Endpoint
 app.get('/', function homepage (req, res) {
@@ -16,7 +16,13 @@ app.get('/', function homepage (req, res) {
 //JSON API Endpoints
 
 //API
-app.get('/api', controller.api.index);
+app.get('/api', controllers.api.index);
+
+//Show user data
+app.get('/api/users/:user_id', controllers.users.show);
+
+//CRUD wardrobe
+
 
 // listen on port 3000
 app.listen(process.env.PORT || 3000, function () {
