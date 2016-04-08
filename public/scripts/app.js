@@ -14,7 +14,7 @@ $(document).ready(function() {
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  // getWeather();
+  getWeather();
 
   $.ajax({
     method: "GET",
@@ -153,7 +153,7 @@ function getWeather() {$.ajax({
 function onWeatherSuccess(json) {
   console.log("onSuccess was called because we got weather from WU");
   $('#weatherText').text(json.forecast.txt_forecast.forecastday[0].fcttext);
-  // $('#dateText').text(json.forecast.txt_forecast.forecastday[0].title);
+  $('#dateText').text(json.forecast.txt_forecast.forecastday[0].title);
   $('#weatherIcon').html('<img src=' + json.forecast.txt_forecast.forecastday[0].icon_url + '>');
   todayTemp = parseInt(json.forecast.simpleforecast.forecastday[0].high.fahrenheit);
   if (todayTemp < 50) {

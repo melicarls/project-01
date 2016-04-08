@@ -1,3 +1,7 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+/*
 #temperature {
   background: pink;
 }
@@ -8,7 +12,7 @@
 
 #wardrobe {
   background: lightblue;
-}
+}*/
 
 .logo {
   width: 100px;
@@ -18,4 +22,8 @@
 
 .modal-content {
   padding: 5px 40px;
+}
+
+h2 {
+  text-align: center;
 }
