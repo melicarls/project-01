@@ -24,7 +24,6 @@ function create(req, res) {
   });
 }
 
-
 //Public exports go here
 module.exports = {
   create: create,
