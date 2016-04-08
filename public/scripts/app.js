@@ -3,7 +3,7 @@ var template;
 var feelsLike = "Mild";
 var isWindy=false;
 var isRainy=false;
-var userId="5706c9a76bb06a880d22606c";
+var userId="5707e0eb669d2c8d251b3ebc";
 var userWardrobe;
 
 $(document).ready(function() {
@@ -40,6 +40,10 @@ $(document).ready(function() {
     console.log("Chosen bottom", chosenBottom);
     $('#chosenTop').html('<h2>' + chosenTop.description + '</h2>');
     $('#chosenBottom').html('<h2>' + chosenBottom.description + '</h2>');
+  });
+
+  $('#deleteButton').on('click', function(e) {
+    console.log("clicked a delete icon");
   });
 
 });
@@ -86,7 +90,7 @@ function newItemSuccess(json) {
   $('#itemColor').val('');
   $('#itemTemp').val('');
   $('#addModal').modal('hide');
-  var toAdd = '<li>' + json.description + '  <i class="fa fa-pencil"></i>  <i class="fa fa-ban"></i></li>';
+  var toAdd = '<li>' + json.description + '  <div class="text-right"><button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>  <button type="button" class="btn btn-danger deleteButton"><i class="fa fa-ban"></i></button></div></li>';
   if (json.category === "Top") {
     $('#newTop').append(toAdd);
   } else if (json.category === "Bottom") {
@@ -99,8 +103,9 @@ function newItemError(err) {
 }
 
 function handleSuccess(json) {
-  console.log(json);
+  console.log("Page load got this data:", json);
   userWardrobe = json.wardrobe;
+  console.log("Here's the wardrobe", userWardrobe);
   renderWardrobe(userWardrobe);
 }
 
@@ -108,11 +113,11 @@ function handleError() {
   console.log("There was an error rendering the user's data");
 }
 
-function renderWardrobe(wardrobeArray) {
+function renderWardrobe(wardrobeObject) {
   console.log("Adding clothes");
   var wardrobeHtml = $('#wardrobe-template').html();
   var wardrobeTemplate = Handlebars.compile(wardrobeHtml);
-  var html = wardrobeTemplate(wardrobeArray);
+  var html = wardrobeTemplate(wardrobeObject);
   $('#wardrobeTarget').prepend(html);
 }
 

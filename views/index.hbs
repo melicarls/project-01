@@ -24,9 +24,14 @@
     </script>
 
   </head>
-  
+
   <body>
     <div class = "container">
+      <div id="navBar" class="col-xs-12">
+        <div class="text-right">
+          <h3>Welcome!</h3>
+        </div>
+      </div>
 
       <div id="temperature" class="col-md-4">
         <h3> Today's weather will be: </h3>
@@ -50,12 +55,22 @@
           <script id = "wardrobe-template" type="text/x-handlebars-template">
             <div id="tops"><h4>Tops</h4>
               <ul id="newTop">
-              {{#each tops}}<li>{{description}}  <i class="fa fa-pencil"></i>  <i class="fa fa-ban"></i></li>{{/each}}
+              \{{#each tops}}
+                <div class="item">
+                  <li>\{{description}}
+                    <div class="text-right"><button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>  <button type="button" class="btn btn-danger deleteButton"><i class="fa fa-ban"></i></button></div>
+                  </li>\{{/each}}
+                </div>
               </ul>
             </div>
             <div id="bottoms"><h4>Bottoms</h4>
               <ul id="newBottom">
-              {{#each bottoms}}<li>{{description}}  <i class="fa fa-pencil"></i>  <i class="fa fa-ban"></i></li>{{/each}}
+              \{{#each bottoms}}
+                <div class="item">
+                  <li>\{{description}}
+                    <div class="text-right"><button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>  <button type="button" class="btn btn-danger deleteButton"><i class="fa fa-ban"></i></button></div>
+                  </li>\{{/each}}
+                </div>
               </ul>
             </div>
           </script>

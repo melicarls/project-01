@@ -31,9 +31,9 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'hbs');
 
 //AUTH Routes
-// app.get('/', function (req, res) {
-//   res.render('index', {user: JSON.stringify(req.user ) + "|| null"});
-// });
+app.get('/', function (req, res) {
+  res.render('index', {user: JSON.stringify(req.user ) + "|| null"});
+});
 //Shows signup page
 app.get('/signup', function (req, res) {
   res.render('signup');
@@ -65,7 +65,7 @@ app.get('/logout', function (req, res) {
 
 //HTML Endpoint
 app.get('/', function homepage (req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+  res.sendFile(__dirname + '/views/index.hbs');
 });
 
 //JSON API Endpoints
