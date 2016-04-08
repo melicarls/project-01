@@ -1,6 +1,6 @@
 var weatherEndpoint = "http://api.wunderground.com/api/4fefd5989e452ef5/forecast/q/CA/San_Francisco.json";
 var template;
-var feelsLike;
+var feelsLike = "Mild";
 var isWindy=false;
 var isRainy=false;
 var userId="5706c9a76bb06a880d22606c";
@@ -14,7 +14,7 @@ $(document).ready(function() {
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  getWeather();
+  // getWeather();
 
   $.ajax({
     method: "GET",
@@ -35,7 +35,9 @@ $(document).ready(function() {
     console.log(userWardrobe);
     e.preventDefault();
     var chosenTop = getRandomForToday(userWardrobe.tops);
+    console.log("Chosen top", chosenTop);
     var chosenBottom = getRandomForToday(userWardrobe.bottoms);
+    console.log("Chosen bottom", chosenBottom);
     $('#chosenTop').html('<h2>' + chosenTop.description + '</h2>');
     $('#chosenBottom').html('<h2>' + chosenBottom.description + '</h2>');
   });
@@ -84,7 +86,7 @@ function newItemSuccess(json) {
   $('#itemColor').val('');
   $('#itemTemp').val('');
   $('#addModal').modal('hide');
-  var toAdd = '<li>' + json.description + '</li>';
+  var toAdd = '<li>' + json.description + '  <i class="fa fa-pencil"></i>  <i class="fa fa-ban"></i></li>';
   if (json.category === "Top") {
     $('#newTop').append(toAdd);
   } else if (json.category === "Bottom") {
@@ -152,13 +154,12 @@ function onWeatherError() {
 }
 
 function getRandomForToday(clothesArr) {
-  console.log(clothesArr);
-  var weatherAppropriate = [];
+  var todayOptions = [];
   clothesArr.forEach(function (el, i, arr) {
     if ((el.temp === feelsLike) && (el.inWind === isWindy) && (el.inRain === isRainy)) {
-      weatherAppropriate.push(el);
+      todayOptions.push(el);
     }
   });
-  var thisOne = (parseInt(Math.random(0, weatherAppropriate.length)));
-  return weatherAppropriate[thisOne];
+  var thisOne = (parseInt(Math.random(0, todayOptions.length)));
+  chosenItem = todayOptions[thisOne];
 }
