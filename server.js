@@ -68,8 +68,6 @@ app.get('/', function homepage (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-//Should these be combined? ^
-
 //JSON API Endpoints
 
 //API

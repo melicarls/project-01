@@ -155,11 +155,31 @@ function onWeatherError() {
 
 function getRandomForToday(clothesArr) {
   var todayOptions = [];
-  clothesArr.forEach(function (el, i, arr) {
-    if ((el.temp === feelsLike) && (el.inWind === isWindy) && (el.inRain === isRainy)) {
-      todayOptions.push(el);
-    }
-  });
-  var thisOne = (parseInt(Math.random(0, todayOptions.length)));
-  chosenItem = todayOptions[thisOne];
+  if ((isWindy === true) && (isRainy === true)) {
+    clothesArr.forEach(function (el, i, arr) {
+      if ((el.temp === feelsLike) && (el.inWind === true) && (el.inRain === true)) {
+        todayOptions.push(el);
+      }
+    });
+  } else if ((isWindy === true) && (isRainy === false)) {
+    clothesArr.forEach(function (el, i, arr) {
+      if ((el.temp === feelsLike) && (el.inWind === true)) {
+        todayOptions.push(el);
+      }
+    });
+  } else if ((isWindy === false) && (isRainy === true)) {
+    clothesArr.forEach(function (el, i, arr) {
+      if ((el.temp === feelsLike) && (el.inRain === true)) {
+        todayOptions.push(el);
+      }
+    });
+  } else if ((isWindy === false) && (isRainy === false)) {
+    clothesArr.forEach(function (el, i, arr) {
+      if (el.temp === feelsLike) {
+        todayOptions.push(el);
+      }
+    });
+  }
+  var randomIndex = (parseInt(Math.random(0, todayOptions.length)));
+  chosenItem = todayOptions[randomIndex];
 }
