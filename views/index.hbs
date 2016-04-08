@@ -57,37 +57,62 @@
         <div id="wardrobeTarget">
           <script id = "wardrobe-template" type="text/x-handlebars-template">
             <div id="tops"><h4>Tops</h4>
-              <ul id="newTop">
+              <div id="newTop">
               \{{#each tops}}
-
                 <div class="item">
-
-                  <li>\{{description}} \{{color}} \{{temp}} \{{inWind}} \{{inRain}}
-                    <div class="text-right">
-                      <button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>
-                      <button type="button" class="btn btn-danger deleteButton" data-item-id="\{{_id}}"><i class="fa fa-ban"></i></button>
+                  <div id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="heading\{{_id}}">
+                        <h4 class="panel-title">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse\{{_id}}" aria-expanded="false" aria-controls="collapse\{{_id}}">
+                            \{{description}}
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapse\{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading\{{_id}}">
+                        <p>Color: \{{color}} </br>
+                        Temperature range: \{{temp}} </br>
+                        Wearable in wind: \{{inWind}} </br>
+                        Wearable in rain: \{{inRain}} </br></p>
+                        <div class="text-right">
+                          <button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>
+                          <button type="button" class="btn btn-danger deleteButton" data-item-id="\{{_id}}"><i class="fa fa-ban"></i></button>
+                        </div>
+                      </div>
                     </div>
-                  </li>
+                  </div>
                 </div>
                 \{{/each}}
-
-              </ul>
+              </div>
             </div>
             <div id="bottoms"><h4>Bottoms</h4>
-              <ul id="newBottom">
+              <div id="newBottom">
               \{{#each bottoms}}
-
                 <div class="item">
-                  <li>\{{description}} \{{color}} \{{temp}} \{{inWind}} \{{inRain}}
-                    <div class="text-right">
-                      <button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>
-                      <button type="button" class="btn btn-danger deleteButton" data-item-id="\{{_id}}"><i class="fa fa-ban"></i></button>
+                  <div id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="heading\{{_id}}">
+                        <h4 class="panel-title">
+                          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse\{{_id}}" aria-expanded="false" aria-controls="collapse\{{_id}}">
+                            \{{description}}
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapse\{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading\{{_id}}">
+                        \{{color}}
+                        \{{temp}}
+                        \{{inWind}}
+                        \{{inRain}}
+                        <div class="text-right">
+                          <button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>
+                          <button type="button" class="btn btn-danger deleteButton" data-item-id="\{{_id}}"><i class="fa fa-ban"></i></button>
+                        </div>
+                      </div>
                     </div>
-                  </li>
+                  </div>
                 </div>
                 \{{/each}}
-
-              </ul>
+              </div>
             </div>
           </script>
         </div>
