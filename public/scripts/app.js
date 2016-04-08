@@ -3,7 +3,7 @@ var template;
 var feelsLike = "Mild";
 var isWindy=false;
 var isRainy=false;
-var userId="5707e0eb669d2c8d251b3ebc";
+var userId="57080405e13b1cd830573d47";
 var userWardrobe;
 
 $(document).ready(function() {
@@ -42,11 +42,32 @@ $(document).ready(function() {
     $('#chosenBottom').html('<h2>' + chosenBottom.description + '</h2>');
   });
 
-  $('#deleteButton').on('click', function(e) {
+  //Delete item
+  $('#wardrobeTarget').on('click', '.deleteButton', function(e) {
     console.log("clicked a delete icon");
+    e.preventDefault();
+    var $thisButton = $(this);
+    var itemId = $thisButton.data('item-id');
+    console.log("Deleting this thing:", itemId);
+    var deleteUrl = '/api/users/' + userId + '/items/' + itemId;
+    $thisButton.closest(".item").html("");
+    $.ajax ({
+      method: 'DELETE',
+      url: deleteUrl,
+      success: handleItemDelete
+    });
+  });
+
+  //Edit item
+  $('#wardrobeTarget').on('click', '.editButton', function(e) {
+    console.log("clicked an edit icon");
   });
 
 });
+
+function handleItemDelete(json) {
+  console.log("Deleted item", json);
+}
 
 function handleNewItemSubmit(e) {
   console.log("New item submit triggered");

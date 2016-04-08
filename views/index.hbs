@@ -58,7 +58,10 @@
               \{{#each tops}}
                 <div class="item">
                   <li>\{{description}}
-                    <div class="text-right"><button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>  <button type="button" class="btn btn-danger deleteButton"><i class="fa fa-ban"></i></button></div>
+                    <div class="text-right">
+                      <button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-danger deleteButton" data-item-id="\{{_id}}"><i class="fa fa-ban"></i></button>
+                    </div>
                   </li>\{{/each}}
                 </div>
               </ul>
@@ -68,9 +71,13 @@
               \{{#each bottoms}}
                 <div class="item">
                   <li>\{{description}}
-                    <div class="text-right"><button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>  <button type="button" class="btn btn-danger deleteButton"><i class="fa fa-ban"></i></button></div>
-                  </li>\{{/each}}
+                    <div class="text-right">
+                      <button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>
+                      <button type="button" class="btn btn-danger deleteButton" data-item-id="\{{_id}}"><i class="fa fa-ban"></i></button>
+                    </div>
+                  </li>
                 </div>
+                \{{/each}}
               </ul>
             </div>
           </script>
