@@ -1,9 +1,9 @@
 var weatherEndpoint = "http://api.wunderground.com/api/4fefd5989e452ef5/forecast/q/CA/San_Francisco.json";
 var template;
-var feelsLike = "Mild";
+var feelsLike = "Cold";
 var isWindy=false;
 var isRainy=false;
-var userId="570880988d6a884b3fba33a2";
+var userId="5709310e720ecb35422b76a5";
 var userWardrobe;
 
 $(document).ready(function() {
@@ -22,6 +22,8 @@ $(document).ready(function() {
     success: handleSuccess,
     error: handleError,
   });
+
+  changeBackground(feelsLike, isRainy);
 
   $('.add-item').on('click', function(e) {
     console.log("clicked add item");
@@ -74,9 +76,25 @@ $(document).ready(function() {
     });
   });
 
+  //Log out and redirect to login page
+  $('.logOut').on('click', function(e) {
+    e.preventDefault();
+    console.log("Clicked log out");
+    $.ajax ({
+      method: 'GET',
+      url: "/logout",
+      success: handleLogout(),
+    });
+  });
+
+
 
 
 });
+
+function handleLogout() {
+  window.location.href = "/login";
+}
 
 function handleItemUpdate(json) {
   console.log("Successfully got a response to update this item", json);
@@ -236,4 +254,17 @@ function getRandomForToday(clothesArr) {
   var randomIndex = (parseInt(Math.random() * todayOptions.length));
   var chosenItem = todayOptions[randomIndex];
   return chosenItem;
+}
+
+function changeBackground(currentWeather, currentRain) {
+  if (currentRain === true) {
+    document.body.style.background = "Grey";
+    return;
+  } else if (currentWeather === "Cold") {
+    document.body.style.background = "Blue";
+  } else if (currentWeather === "Mild") {
+    document.body.style.background = "Pink";
+  } else if (currentWeather === "Hot") {
+    document.body.style.background = "Red";
+  }
 }
