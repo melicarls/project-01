@@ -14,7 +14,7 @@ $(document).ready(function() {
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  getWeather();
+  // getWeather();
 
   $.ajax({
     method: "GET",
@@ -61,9 +61,25 @@ $(document).ready(function() {
   //Edit item
   $('#wardrobeTarget').on('click', '.editButton', function(e) {
     console.log("clicked an edit icon");
+    e.preventDefault();
+    var $thisButton = $(this);
+    var itemId = $thisButton.data('item-id');
+    console.log("Updating this thing:", itemId);
+    var putUrl = '/api/users/' + userId + '/items/' + itemId;
+    $.ajax ({
+      method: 'PUT',
+      url: putUrl,
+      success: handleItemUpdate
+    });
   });
 
+
+
 });
+
+function handleItemUpdate(json) {
+  console.log("Successfully got a response to update this item", json);
+}
 
 function handleItemDelete(json) {
   console.log("Deleted item", json);
@@ -153,7 +169,7 @@ function getWeather() {$.ajax({
 function onWeatherSuccess(json) {
   console.log("onSuccess was called because we got weather from WU");
   $('#weatherText').text(json.forecast.txt_forecast.forecastday[0].fcttext);
-  $('#dateText').text(json.forecast.txt_forecast.forecastday[0].title);
+  // $('#dateText').text(json.forecast.txt_forecast.forecastday[0].title);
   $('#weatherIcon').html('<img src=' + json.forecast.txt_forecast.forecastday[0].icon_url + '>');
   todayTemp = parseInt(json.forecast.simpleforecast.forecastday[0].high.fahrenheit);
   if (todayTemp < 50) {

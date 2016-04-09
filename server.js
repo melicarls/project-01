@@ -79,6 +79,7 @@ app.get('/api/users/:user_id', controllers.users.show);
 //CRUD wardrobe
 app.post('/api/users/:user_id/items', controllers.items.create);
 app.delete('/api/users/:user_id/items/:item_id', controllers.items.destroy);
+app.put('/api/users/:user_id/items/:item_id', controllers.items.update);
 
 // listen on port 3000
 app.listen(process.env.PORT || 3000, function () {

@@ -53,8 +53,51 @@ function destroy(req, res) {
   });
 }
 
+function update(req, res) {
+  db.User.findById(req.params.user_id, function(err, foundUser) {
+    console.log(foundUser);
+    foundUser.wardrobe.tops.forEach(function (el, i, arr) {
+      console.log("Element", el._id);
+      console.log("Params", req.params.item_id);
+      if (el._id == req.params.item_id) {
+        console.log("Found the item to update!");
+        el.description = req.body.description;
+        el.color = req.body.color;
+        el.temp = req.body.temp;
+        el.inWind = req.body.inWind;
+        el.inRain = req.body.inRain;
+        foundUser.save(function(err, saved) {
+          if (err) {
+            console.log("Save error ", err);
+          } else {
+            res.json(foundUser.wardrobe);
+          }
+        });
+      }
+    });
+    foundUser.wardrobe.bottoms.forEach(function (el, i, arr) {
+      if (el._id == req.params.item_id) {
+        console.log("Found the item to update!");
+        el.description = req.body.description;
+        el.color = req.body.color;
+        el.temp = req.body.temp;
+        el.inWind = req.body.inWind;
+        el.inRain = req.body.inRain;
+        foundUser.save(function(err, saved) {
+          if (err) {
+            console.log("Save error ", err);
+          } else {
+            res.json(foundUser.wardrobe);
+          }
+        });
+      }
+    });
+  });
+}
+
 //Public exports go here
 module.exports = {
   create: create,
   destroy: destroy,
+  update: update,
 };
