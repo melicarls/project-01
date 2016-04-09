@@ -3,7 +3,7 @@ var template;
 var feelsLike = "Mild";
 var isWindy=false;
 var isRainy=false;
-var userId="57080405e13b1cd830573d47";
+var userId="570880988d6a884b3fba33a2";
 var userWardrobe;
 
 $(document).ready(function() {
@@ -62,6 +62,7 @@ $(document).ready(function() {
   $('#wardrobeTarget').on('click', '.editButton', function(e) {
     console.log("clicked an edit icon");
     e.preventDefault();
+    var formData = $(this).serialize();
     var $thisButton = $(this);
     var itemId = $thisButton.data('item-id');
     console.log("Updating this thing:", itemId);
@@ -169,7 +170,7 @@ function getWeather() {$.ajax({
 function onWeatherSuccess(json) {
   console.log("onSuccess was called because we got weather from WU");
   $('#weatherText').text(json.forecast.txt_forecast.forecastday[0].fcttext);
-  // $('#dateText').text(json.forecast.txt_forecast.forecastday[0].title);
+  $('#dateText').text(json.forecast.txt_forecast.forecastday[0].title);
   $('#weatherIcon').html('<img src=' + json.forecast.txt_forecast.forecastday[0].icon_url + '>');
   todayTemp = parseInt(json.forecast.simpleforecast.forecastday[0].high.fahrenheit);
   if (todayTemp < 50) {
@@ -200,29 +201,39 @@ function getRandomForToday(clothesArr) {
   var todayOptions = [];
   if ((isWindy === true) && (isRainy === true)) {
     clothesArr.forEach(function (el, i, arr) {
-      if ((el.temp === feelsLike) && (el.inWind === true) && (el.inRain === true)) {
+      if ((el["temp"] === feelsLike) && (el["inWind"] === true) && (el["inRain"] === true)) {
         todayOptions.push(el);
+      } else {
+        console.log("Checking next");
       }
     });
   } else if ((isWindy === true) && (isRainy === false)) {
     clothesArr.forEach(function (el, i, arr) {
-      if ((el.temp === feelsLike) && (el.inWind === true)) {
+      if ((el["temp"] === feelsLike) && (el["inWind"] === true)) {
         todayOptions.push(el);
+      }
+      else {
+        console.log("Checking next");
       }
     });
   } else if ((isWindy === false) && (isRainy === true)) {
     clothesArr.forEach(function (el, i, arr) {
-      if ((el.temp === feelsLike) && (el.inRain === true)) {
+      if ((el["temp"] === feelsLike) && (el["inRain"] === true)) {
         todayOptions.push(el);
+      } else {
+        console.log("Checking next");
       }
     });
   } else if ((isWindy === false) && (isRainy === false)) {
     clothesArr.forEach(function (el, i, arr) {
-      if (el.temp === feelsLike) {
+      if (el["temp"] === feelsLike) {
         todayOptions.push(el);
+      } else {
+        console.log("Checking next");
       }
     });
   }
-  var randomIndex = (parseInt(Math.random(0, todayOptions.length)));
-  chosenItem = todayOptions[randomIndex];
+  var randomIndex = (parseInt(Math.random() * todayOptions.length));
+  var chosenItem = todayOptions[randomIndex];
+  return chosenItem;
 }
