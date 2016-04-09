@@ -28,16 +28,16 @@
 
   <body>
     <div class = "container">
-      <div id="navBar" class="col-xs-12">
-        <button type="button" class="btn btn-info logOut">Log Out</button>
-        <div class="text-right">
+      <div id="navBar" class="col-md-12">
+        <button type="button" class="btn btn-info logOut pull-right">Log Out</button>
+        <div>
           <h3>Welcome {{{user}}}!</h3>
         </div>
       </div>
 
-      <div id="temperature" class="col-md-4">
+      <div id="temperature" class="col-md-3 panel">
         <h2>Today's weather</h2>
-        <h3>Now planning for</h3><h3 id="dateText"></h3><h3>in San Francisco, CA. </h3>
+        <h3>Now planning for</h3><h4 id="dateText"></h4><h4>in San Francisco, CA. </h4>
         <h3>The weather will be: </h3>
         <h4 id="weatherText"></h4>
         <div id="weatherIcon" class="col-md-4">
@@ -47,13 +47,13 @@
       </div>
 
 
-      <div id="avatar" class="col-md-4">
+      <div id="avatar" class="col-md-4 panel">
         <h2>Wear this!</h2>
         <div id="chosenTop"></div>
         <div id="chosenBottom"></div>
       </div>
 
-      <div id="wardrobe" class="col-md-4">
+      <div id="wardrobe" class="col-md-4 panel">
         <h2>Wardrobe</h2>
         <!--Start Handlebars-->
         <div id="wardrobeTarget">
@@ -146,15 +146,15 @@
                         <div class="form-group">
                           <label class="control-label" for="editColor">Item color:</label>
                           <select class="form-control" id="editColor" value="\{{color}}">
-                            <option>Red</option>
-                            <option>Orange</option>
-                            <option>Yellow</option>
-                            <option>Green</option>
-                            <option>Blue</option>
-                            <option>Purple</option>
-                            <option>White</option>
-                            <option>Grey</option>
-                            <option>Black</option>
+                            <option value="Red">Red</option>
+                            <option value="Orange">Orange</option>
+                            <option value="Yellow">Yellow</option>
+                            <option value="Green">Green</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Purple">Purple</option>
+                            <option value="White">White</option>
+                            <option value="Grey">Grey</option>
+                            <option value="Black">Black</option>
                           </select>
                         </div>
                         <div class="form-group">
@@ -194,8 +194,7 @@
         <button class='btn btn-primary add-item'><i class="fa fa-plus"></i></button>
       </div>
 
-
-      <!-- begin addModal: this is not visible until you call .modal() on it -->
+      <!-- begin addModal -->
       <div class="modal fade" tabindex="-1" role="dialog" id="addModal">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -238,8 +237,6 @@
                     <option>Black</option>
                   </select>
                 </div>
-
-                <!-- Add one for the silhouette that depends on itemCat form-->
 
                 <!-- Drop down input for weather range-->
                 <div class="form-group">

@@ -1,5 +1,17 @@
 body {
   font-family: 'Raleway', sans-serif;
+  background-size: 2000px;
+}
+
+#navBar {
+  background-color: rgba(255, 255, 255, 0.70);
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.panel {
+  background-color: rgba(255, 255, 255, 0.70);
+  margin-left: 30px;
 }
 
 .logo {

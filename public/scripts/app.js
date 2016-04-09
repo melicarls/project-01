@@ -2,7 +2,7 @@ var weatherEndpoint = "http://api.wunderground.com/api/4fefd5989e452ef5/forecast
 var template;
 var feelsLike = "Cold";
 var isWindy=false;
-var isRainy=false;
+var isRainy=true;
 var userId="5709310e720ecb35422b76a5";
 var userWardrobe;
 
@@ -258,13 +258,13 @@ function getRandomForToday(clothesArr) {
 
 function changeBackground(currentWeather, currentRain) {
   if (currentRain === true) {
-    document.body.style.background = "Grey";
+    document.body.style.backgroundImage = 'url(./images/rainy-background.jpg)';
     return;
   } else if (currentWeather === "Cold") {
-    document.body.style.background = "Blue";
+    document.body.style.backgroundImage = 'url(./images/cold-background.jpg)';
   } else if (currentWeather === "Mild") {
-    document.body.style.background = "Pink";
+    document.body.style.backgroundImage = 'url(./images/mild-background.jpg)';
   } else if (currentWeather === "Hot") {
-    document.body.style.background = "Red";
+    document.body.style.backgroundImage = 'url(./images/hot-background.jpg)';
   }
 }
