@@ -27,3 +27,15 @@ body {
 h2 {
   text-align: center;
 }
+
+#tops {
+  height: 300px;
+  overflow: scroll;
+  overflow-x:hidden;
+}
+
+#bottoms {
+  height: 300px;
+  overflow: scroll;
+  overflow-x:hidden;
+}
