@@ -1,9 +1,10 @@
+
 var weatherEndpoint = "http://api.wunderground.com/api/4fefd5989e452ef5/forecast/q/CA/San_Francisco.json";
 var template;
 var feelsLike = "Cold";
 var isWindy=false;
 var isRainy=true;
-var userId="5709310e720ecb35422b76a5";
+var userId="570a99fec05c479d51e70ff2";
 var userWardrobe;
 
 $(document).ready(function() {
@@ -35,21 +36,17 @@ $(document).ready(function() {
   $('#randomize').on('click', function(e) {
     e.preventDefault();
     var chosenTop = getRandomForToday(userWardrobe.tops);
-    console.log("Chosen top", chosenTop);
     var chosenBottom = getRandomForToday(userWardrobe.bottoms);
-    console.log("Chosen bottom", chosenBottom);
     $('#chosenTop').html('<h2>' + chosenTop.description + '</h2>');
     $('#chosenBottom').html('<h2>' + chosenBottom.description + '</h2>');
-    $('#comment').html("<p> This would be a good outfit since it's so " + feelsLike.toLowerCase() + " out.")
+    $('#comment').html("<p> This would be a good outfit since it's so " + feelsLike.toLowerCase() + " out.");
   });
 
   //Delete item
   $('#wardrobeTarget').on('click', '.deleteButton', function(e) {
-    console.log("clicked a delete icon");
     e.preventDefault();
     var $thisButton = $(this);
     var itemId = $thisButton.data('item-id');
-    console.log("Deleting this thing:", itemId);
     var deleteUrl = '/api/users/' + userId + '/items/' + itemId;
     $thisButton.closest(".item").html("");
     $.ajax ({
@@ -86,11 +83,15 @@ $(document).ready(function() {
     });
   });
 
-$('#showInfo').on('click', function(e) {
-  e.preventDefault();
-  $('#infoModal').modal('show');
-});
+  $('#showInfo').on('click', function(e) {
+    e.preventDefault();
+    $('#infoModal').modal('show');
+  });
 
+  $('#wardrobeTarget').on('click', $('.item'), function(e) {
+    e.preventDefault();
+    var itemId = $('.item').data('item-id');
+  });
 
 });
 
@@ -160,8 +161,9 @@ function newItemError(err) {
 
 function handleSuccess(json) {
   console.log("Page load got this data:", json);
+  name = json.username;
+  $('#nameHere').append(name + "!")
   userWardrobe = json.wardrobe;
-  console.log("Here's the wardrobe", userWardrobe);
   renderWardrobe(userWardrobe);
 }
 
@@ -170,7 +172,6 @@ function handleError() {
 }
 
 function renderWardrobe(wardrobeObject) {
-  console.log("Adding clothes");
   var wardrobeHtml = $('#wardrobe-template').html();
   var wardrobeTemplate = Handlebars.compile(wardrobeHtml);
   var html = wardrobeTemplate(wardrobeObject);
@@ -206,6 +207,16 @@ function onWeatherSuccess(json) {
   if (todayRain > 30) {
     isRainy = true;
   }
+  $('#firstTitle').text(json.forecast.txt_forecast.forecastday[1].title);
+  $('#firstForecast').text(json.forecast.txt_forecast.forecastday[1].fcttext);
+  $('#secondTitle').text(json.forecast.txt_forecast.forecastday[2].title);
+  $('#secondForecast').text(json.forecast.txt_forecast.forecastday[2].fcttext);
+  $('#thirdTitle').text(json.forecast.txt_forecast.forecastday[3].title);
+  $('#thirdForecast').text(json.forecast.txt_forecast.forecastday[3].fcttext);
+  $('#fourthTitle').text(json.forecast.txt_forecast.forecastday[4].title);
+  $('#fourthForecast').text(json.forecast.txt_forecast.forecastday[4].fcttext);
+  $('#fifthTitle').text(json.forecast.txt_forecast.forecastday[5].title);
+  $('#fifthForecast').text(json.forecast.txt_forecast.forecastday[5].fcttext);
 }
 
 function onWeatherError() {

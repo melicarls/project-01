@@ -34,13 +34,17 @@ h2 {
 }
 
 #tops {
-  height: 300px;
+  height: 350px;
   overflow: scroll;
   overflow-x:hidden;
 }
 
 #bottoms {
-  height: 300px;
+  height: 350px;
   overflow: scroll;
   overflow-x:hidden;
+}
+
+hr {
+  color: darkgrey;
 }

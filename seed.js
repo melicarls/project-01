@@ -22,6 +22,16 @@ var sampleWardrobe = {
         inRain: false,
     },
     {
+        description: "Purple shirt",
+        category: "Top",
+        color: "Purple",
+        type: "Short sleeve shirt",
+        url: String,
+        temp: "Cold",
+        inWind: true,
+        inRain: true,
+    },
+    {
         description: "Red t-shirt",
         category: "Top",
         color: "Red",
@@ -62,7 +72,7 @@ var sampleWardrobe = {
         inRain: true,
     },
     {
-        description: "Loose waterproof shirt",
+        description: "Waterproof shirt",
         category: "Top",
         color: "Yellow",
         type: "Long sleeve shirt",

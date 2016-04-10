@@ -32,19 +32,44 @@
         <button type="button" id="showInfo" class="btn btn-info pull-right"><i class="fa fa-question-circle"></i></button>
         <button type="button" class="btn btn-info logOut pull-right">Log Out</button>
         <div>
-          <h3>Welcome {{{user}}}!</h3>
+          <h3 id="nameHere">Welcome, </h3>
         </div>
       </div>
 
       <div id="temperature" class="col-md-3 panel">
-        <h2>Today's weather</h2>
+        <h2>Weather</h2>
         <h3>Now planning for</h3><h4 id="dateText"></h4><h4>in San Francisco, CA. </h4>
         <h3>The weather will be: </h3>
         <h4 id="weatherText"></h4>
         <div id="weatherIcon" class="col-md-4">
-          </br>
         </div>
-        <button type="button" id="randomize" class="btn btn-primary btn-lg">Dress Me!</button>
+        <button type="button" id="randomize" class="btn btn-primary btn-lg align-center">Dress Me!</button>
+        <hr>
+        <h3>Forecast for the week:</h3>
+        <div>
+          <h4 id="firstTitle"></h4>
+          <p id="firstForecast"></p>
+        </div>
+        <hr>
+        <div>
+          <h4 id="secondTitle"></h4>
+          <p id="secondForecast"></p>
+        </div>
+        <hr>
+        <div>
+          <h4 id="thirdTitle"></h4>
+          <p id="thirdForecast"></p>
+        </div>
+        <hr>
+        <div>
+          <h4 id="fourthTitle"></h4>
+          <p id="fourthForecast"></p>
+        </div>
+        <hr>
+        <div>
+          <h4 id="fifthTitle"></h4>
+          <p id="fifthForecast"></p>
+        </div>
       </div>
 
 
@@ -64,7 +89,7 @@
             <div id="tops">
               <div id="newTop">
               \{{#each tops}}
-                <div class="item">
+                <div class="item" data-item-id=\{{_id}}>
                   <div id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="heading\{{_id}}">
