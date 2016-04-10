@@ -29,6 +29,7 @@
   <body>
     <div class = "container">
       <div id="navBar" class="col-md-12">
+        <button type="button" id="showInfo" class="btn btn-info pull-right"><i class="fa fa-question-circle"></i></button>
         <button type="button" class="btn btn-info logOut pull-right">Log Out</button>
         <div>
           <h3>Welcome {{{user}}}!</h3>
@@ -51,6 +52,7 @@
         <h2>Wear this!</h2>
         <div id="chosenTop"></div>
         <div id="chosenBottom"></div>
+        <div id="comment"></div>
       </div>
 
       <div id="wardrobe" class="col-md-4 panel">
@@ -272,6 +274,26 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-undo"></i></button>
               <button type="button" class="btn btn-primary" id="saveItem"><i class="fa fa-floppy-o"></i></button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <!-- begin infoModal -->
+      <div class="modal fade" tabindex="-1" role="dialog" id="infoModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h3 class="modal-title">About</h3>
+            </div>
+            <div class="modal-body">
+              <h4>Welcome to my first project!</h4>
+              <p>After logging in, enter your wardrobe into the panel to the right using the + button. Once you have listed all of your clothes, click "Dress Me!" The application will choose a weather appropriate outfit for you based on projected outdoor temperatures (categorized as cold, mild, or hot), projected rain, and projected wind speeds. You can add to, edit, or delete your wardrobe items at any time using the buttons in the wardrobe panel. </p>
+              <p>This application is my first full stack web application, created for the Web Development Immersive course at General Assembly in San Francisco.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="fa fa-arrow-left"></i></button>
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
