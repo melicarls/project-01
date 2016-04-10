@@ -103,12 +103,12 @@
                         <div class="form-group">
                           <label class="control-label" for="editDescription">New description:</label>
                           <div>
-                            <input id="editDescription" name="editDescription" type="text" class="form-control input-md" value="\{{description}}" required>
+                            <input id="editDescription\{{_id}}" name="editDescription" type="text" class="form-control input-md" value="\{{description}}" required>
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="editColor">Item color:</label>
-                          <select class="form-control" id="editColor" value="\{{color}}">
+                          <select class="form-control" id="editColor\{{_id}}" value="\{{color}}">
                             <option value="Red">Red</option>
                             <option value="Orange">Orange</option>
                             <option value="Yellow">Yellow</option>
@@ -122,7 +122,7 @@
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="editTemp">Temperature:</label>
-                          <select class="form-control" id="editTemp" value=\{{temp}}>
+                          <select class="form-control" id="editTemp\{{_id}}" value=\{{temp}}>
                             <option>Hot</option>
                             <option>Mild</option>
                             <option>Cold</option>
@@ -130,18 +130,18 @@
                         </div>
                         <div class="checkbox">
                           <label class="control-label" for="editInWind">
-                            <input id="editInWind" name="editInWind" type="checkbox" class="form-control" value=\{{inWind}}>
+                            <input id="editInWind\{{_id}}" name="editInWind" type="checkbox" class="form-control" value=\{{inWind}}>
                             Wearable in wind?
                           </label>
                         </div>
                         <div class="checkbox">
                           <label class="control-label" for="editInRain">
-                            <input id="editInRain" name="editInRain" type="checkbox" class="form-control" value=\{{inRain}}>
+                            <input id="editInRain\{{_id}}" name="editInRain" type="checkbox" class="form-control" value=\{{inRain}}>
                             Wearable in rain?
                           </label>
                         </div>
                         <div class="text-right">
-                          <button type="button" class="btn btn-info editButton" data-item-id="\{{_id}}"><i class="fa fa-pencil"></i></button>
+                          <button type="button" class="btn btn-info editButton" data-item-id="\{{_id}}" data-cat="Tops"><i class="fa fa-pencil"></i></button>
                           <button type="button" class="btn btn-danger deleteButton" data-item-id="\{{_id}}"><i class="fa fa-ban"></i></button>
                         </div>
                       </div>
@@ -207,7 +207,7 @@
                           </label>
                         </div>
                         <div class="text-right">
-                          <button type="button" class="btn btn-info editButton" data-item-id="\{{_id}}"><i class="fa fa-pencil"></i></button>
+                          <button type="button" class="btn btn-info editButton" data-item-id="\{{_id}}" data-cat="Bottoms"><i class="fa fa-pencil"></i></button>
                           <button type="button" class="btn btn-danger deleteButton" data-item-id="\{{_id}}"><i class="fa fa-ban"></i></button>
                         </div>
                       </div>

@@ -60,14 +60,27 @@ $(document).ready(function() {
   $('#wardrobeTarget').on('click', '.editButton', function(e) {
     console.log("clicked an edit icon");
     e.preventDefault();
-    var formData = $(this).serialize();
     var $thisButton = $(this);
     var itemId = $thisButton.data('item-id');
-    console.log("Updating this thing:", itemId);
+    var newDesc = $('#editDescription'+itemId).val();
+    var newCat = $thisButton.data('cat');
+    var newColor = $('#editColor'+itemId).val();
+    var newTemp = $('#editTemp'+itemId).val();
+    var newInWind = $('#editInWind'+itemId).val();
+    var newInRain = $('#editInRain'+itemId).val();
+    var sendThis = {
+      description: newDesc,
+      category: newCat,
+      color: newColor,
+      temp: newTemp,
+      inWind: newInWind,
+      inRain: newInRain
+    }
     var putUrl = '/api/users/' + userId + '/items/' + itemId;
     $.ajax ({
       method: 'PUT',
       url: putUrl,
+      data: sendThis,
       success: handleItemUpdate
     });
   });
