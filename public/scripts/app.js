@@ -4,18 +4,17 @@ var template;
 var feelsLike = "Cold";
 var isWindy=false;
 var isRainy=true;
-var userId="570a99fec05c479d51e70ff2";
+var userId="570ad3a1b7fe0edf610662a9";
 var userWardrobe;
+var user;
 
 $(document).ready(function() {
   console.log('app.js loaded!');
-
   $userData = $('#wardrobeTarget');
-
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  // getWeather();
+  getWeather();
 
   $.ajax({
     method: "GET",
@@ -35,8 +34,17 @@ $(document).ready(function() {
 
   $('#randomize').on('click', function(e) {
     e.preventDefault();
+    console.log("Clicked get random outfit");
     var chosenTop = getRandomForToday(userWardrobe.tops);
+    if (chosenTop === undefined) {
+      $('#chosenTop').html("<h2>You don't have any appropriate shirts for today's weather. Try entering more wardrobe items.</h2>");
+      return;
+    }
     var chosenBottom = getRandomForToday(userWardrobe.bottoms);
+    if (chosenBottom === undefined) {
+      $('#chosenBottom').html("<h2>You don't have any appropriate bottoms for today's weather. Try entering more wardrobe items.</h2>");
+      return;
+    }
     $('#chosenTop').html('<h2>' + chosenTop.description + '</h2>');
     $('#chosenBottom').html('<h2>' + chosenBottom.description + '</h2>');
     $('#comment').html("<p> This would be a good outfit since it's so " + feelsLike.toLowerCase() + " out.");
@@ -68,6 +76,7 @@ $(document).ready(function() {
     var newTemp = $('#editTemp'+itemId).val();
     var newInWind = $('#editInWind'+itemId).val();
     var newInRain = $('#editInRain'+itemId).val();
+    $thisButton.closest(".item").html("");
     var sendThis = {
       description: newDesc,
       category: newCat,
@@ -75,7 +84,7 @@ $(document).ready(function() {
       temp: newTemp,
       inWind: newInWind,
       inRain: newInRain
-    }
+    };
     var putUrl = '/api/users/' + userId + '/items/' + itemId;
     $.ajax ({
       method: 'PUT',
@@ -88,7 +97,6 @@ $(document).ready(function() {
   //Log out and redirect to login page
   $('.logOut').on('click', function(e) {
     e.preventDefault();
-    console.log("Clicked log out");
     $.ajax ({
       method: 'GET',
       url: "/logout",
@@ -113,7 +121,12 @@ function handleLogout() {
 }
 
 function handleItemUpdate(json) {
-  console.log("Successfully got a response to update this item", json);
+  var toAdd = addHtmlFirst + json.description + addHtmlSecond + json._id + addHtmlThird + json._id + addHtmlFourth;
+  if (json.category === "Top") {
+    $('#newTop').append(toAdd);
+  } else if (json.category === "Bottom") {
+    $('#newBottom').append(toAdd);
+  }
 }
 
 function handleItemDelete(json) {
@@ -154,13 +167,12 @@ function handleNewItemSubmit(e) {
 }
 
 function newItemSuccess(json) {
-  console.log("Got this data from POST route", json);
   $('#itemDescription').val('');
   $('#itemCategory').val('');
   $('#itemColor').val('');
   $('#itemTemp').val('');
   $('#addModal').modal('hide');
-  var toAdd = addHtmlFront + json.description + addHtmlBack;
+  var toAdd = addHtmlFirst + json.description + addHtmlSecond + json._id + addHtmlThird + json._id + addHtmlFourth;
   if (json.category === "Top") {
     $('#newTop').append(toAdd);
   } else if (json.category === "Bottom") {
@@ -173,9 +185,9 @@ function newItemError(err) {
 }
 
 function handleSuccess(json) {
-  console.log("Page load got this data:", json);
+  user = json;
   name = json.username;
-  $('#nameHere').append(name + "!")
+  $('#nameHere').append(name + "!");
   userWardrobe = json.wardrobe;
   renderWardrobe(userWardrobe);
 }
@@ -200,7 +212,6 @@ function getWeather() {$.ajax({
 }
 
 function onWeatherSuccess(json) {
-  console.log("onSuccess was called because we got weather from WU");
   $('#weatherText').text(json.forecast.txt_forecast.forecastday[0].fcttext);
   $('#dateText').text(json.forecast.txt_forecast.forecastday[0].title);
   $('#weatherIcon').html('<img src=' + json.forecast.txt_forecast.forecastday[0].icon_url + '>');
@@ -281,5 +292,7 @@ function changeBackground(currentWeather, currentRain) {
   }
 }
 
-var addHtmlFront='<div class="item"><div id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading{{_id}}"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{_id}}" aria-expanded="false" aria-controls="collapse{{_id}}">';
-var addHtmlBack='</a></h4></div><div id="collapse{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{_id}}"><div class="form-group"><label class="control-label" for="editDescription">New description:</label><div><input id="editDescription" name="editDescription" type="text" class="form-control input-md" value="{{description}}" required></div></div><div class="form-group"><label class="control-label" for="editColor">Item color:</labelselect class="form-control" id="editColor" value="{{color}}">  <option value="Red">Red</option>  <option value="Orange">Orange</option>  <option value="Yellow">Yellow</option>  <option value="Green">Green</option>  <option value="Blue">Blue</option><option value="Purple">Purple</option></div><div class="form-group"><label class="control-label" for="editTemp">Temperature:</label><select class="form-control" id="editTemp" value={{temp}}><option>Hot</option><option>Mild</option><option>Cold</option></select></div><div class="checkbox"><label class="control-label" for="editInWind"><input id="editInWind" name="editInWind" type="checkbox" class="form-control" value={{inWind}}>Wearable in wind?</label></div><div class="checkbox"><label class="control-label" for="editInRain"><input id="editInRain" name="editInRain" type="checkbox" class="form-control" value={{inRain}}>  Wearable in rain?</label><div><div class="text-right"><button type="button" class="btn btn-info editButton" data-item-id="{{_id}}"><i class="fa fa-pencil"></i></button><button type="button" class="btn btn-danger deleteButton" data-item-id="{{_id}}"><i class="fa fa-ban"></i></button></div></div></div></div></div>';
+var addHtmlFirst='<div class="item"><div id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse" aria-expanded="false" aria-controls="collapse">';
+var addHtmlSecond='</a></h4></div><div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading"><div class="form-group"><label class="control-label" for="editDescription">New description:</label><div><input id="editDescription" name="editDescription" type="text" class="form-control input-md" required></div></div><div class="form-group"><label class="control-label" for="editColor">Item color:</labelselect class="form-control" id="editColor">  <option value="Red">Red</option>  <option value="Orange">Orange</option>  <option value="Yellow">Yellow</option>  <option value="Green">Green</option>  <option value="Blue">Blue</option><option value="Purple">Purple</option></div><div class="form-group"><label class="control-label" for="editTemp">Temperature:</label><select class="form-control" id="editTemp"><option>Hot</option><option>Mild</option><option>Cold</option></select></div><div class="checkbox"><label class="control-label" for="editInWind"><input id="editInWind" name="editInWind" type="checkbox" class="form-control">Wearable in wind?</label></div><div class="checkbox"><label class="control-label" for="editInRain"><input id="editInRain" name="editInRain" type="checkbox" class="form-control">  Wearable in rain?</label><div><div class="text-right"><button type="button" class="btn btn-info editButton" data-item-id="';
+var addHtmlThird='"><i class="fa fa-pencil"></i></button><button type="button" class="btn btn-danger deleteButton" data-item-id="';
+var addHtmlFourth='"><i class="fa fa-ban"></i></button></div></div></div></div></div>;';

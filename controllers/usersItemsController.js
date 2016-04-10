@@ -54,14 +54,17 @@ function destroy(req, res) {
 }
 
 function update(req, res) {
+  console.log("Reached update route");
   db.User.findById(req.params.user_id, function(err, foundUser) {
-    console.log(foundUser);
+    console.log("Request", req);
+    console.log("User", foundUser);
     foundUser.wardrobe.tops.forEach(function (el, i, arr) {
       console.log("Element", el._id);
       console.log("Params", req.params.item_id);
       if (el._id == req.params.item_id) {
         console.log("Found the item to update!");
         el.description = req.body.description;
+        el.category = req.body.category;
         el.color = req.body.color;
         el.temp = req.body.temp;
         el.inWind = req.body.inWind;
@@ -70,7 +73,7 @@ function update(req, res) {
           if (err) {
             console.log("Save error ", err);
           } else {
-            res.json(foundUser.wardrobe);
+            res.json(el);
           }
         });
       }
@@ -79,6 +82,7 @@ function update(req, res) {
       if (el._id == req.params.item_id) {
         console.log("Found the item to update!");
         el.description = req.body.description;
+        el.category = req.body.category;
         el.color = req.body.color;
         el.temp = req.body.temp;
         el.inWind = req.body.inWind;
@@ -87,7 +91,7 @@ function update(req, res) {
           if (err) {
             console.log("Save error ", err);
           } else {
-            res.json(foundUser.wardrobe);
+            res.json(el);
           }
         });
       }
