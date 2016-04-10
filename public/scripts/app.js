@@ -146,7 +146,7 @@ function newItemSuccess(json) {
   $('#itemColor').val('');
   $('#itemTemp').val('');
   $('#addModal').modal('hide');
-  var toAdd = '<li>' + json.description + '  <div class="text-right"><button type="button" class="btn btn-info editButton"><i class="fa fa-pencil"></i></button>  <button type="button" class="btn btn-danger deleteButton"><i class="fa fa-ban"></i></button></div></li>';
+  var toAdd = addHtmlFront + json.description + addHtmlBack;
   if (json.category === "Top") {
     $('#newTop').append(toAdd);
   } else if (json.category === "Bottom") {
@@ -268,3 +268,6 @@ function changeBackground(currentWeather, currentRain) {
     document.body.style.backgroundImage = 'url(./images/hot-background.jpg)';
   }
 }
+
+var addHtmlFront='<div class="item"><div id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading{{_id}}"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{_id}}" aria-expanded="false" aria-controls="collapse{{_id}}">';
+var addHtmlBack='</a></h4></div><div id="collapse{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{_id}}"><div class="form-group"><label class="control-label" for="editDescription">New description:</label><div><input id="editDescription" name="editDescription" type="text" class="form-control input-md" value="{{description}}" required></div></div><div class="form-group"><label class="control-label" for="editColor">Item color:</labelselect class="form-control" id="editColor" value="{{color}}">  <option value="Red">Red</option>  <option value="Orange">Orange</option>  <option value="Yellow">Yellow</option>  <option value="Green">Green</option>  <option value="Blue">Blue</option><option value="Purple">Purple</option></div><div class="form-group"><label class="control-label" for="editTemp">Temperature:</label><select class="form-control" id="editTemp" value={{temp}}><option>Hot</option><option>Mild</option><option>Cold</option></select></div><div class="checkbox"><label class="control-label" for="editInWind"><input id="editInWind" name="editInWind" type="checkbox" class="form-control" value={{inWind}}>Wearable in wind?</label></div><div class="checkbox"><label class="control-label" for="editInRain"><input id="editInRain" name="editInRain" type="checkbox" class="form-control" value={{inRain}}>  Wearable in rain?</label><div><div class="text-right"><button type="button" class="btn btn-info editButton" data-item-id="{{_id}}"><i class="fa fa-pencil"></i></button><button type="button" class="btn btn-danger deleteButton" data-item-id="{{_id}}"><i class="fa fa-ban"></i></button></div></div></div></div></div>';
