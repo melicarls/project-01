@@ -6,6 +6,7 @@ var feelsLike;
 var isWindy=false;
 var isRainy=false;
 var userId;
+var name;
 var userWardrobe;
 var user;
 
@@ -20,6 +21,8 @@ $(document).ready(function() {
     window.location.href = "/login";
   } else {
 
+  name = window.user["username"];
+  $('#nameHere').append(name + "!");
   userId = window.user["_id"];
 
   $.ajax({
@@ -37,9 +40,7 @@ $(document).ready(function() {
 
   getWeather();
 
-
   $('.add-item').on('click', function(e) {
-    console.log("clicked add item");
     $('#addModal').modal('show');
   });
 
@@ -84,6 +85,10 @@ $(document).ready(function() {
     var $thisButton = $(this);
     var itemId = $thisButton.data('item-id');
     var newDesc = $('#editDescription'+itemId).val();
+    if (newDesc.length === 0) {
+      alert("You can't save without a description.");
+      return;
+    }
     var newCat = $thisButton.data('cat');
     var newColor = $('#editColor'+itemId).val();
     var newTemp = $('#editTemp'+itemId).val();
@@ -152,6 +157,10 @@ function handleItemDelete(json) {
 function handleNewItemSubmit(e) {
   e.preventDefault();
   var newDescription = $('#itemDescription').val();
+  if (newDescription.length === 0) {
+    alert("You can't save without a description.");
+    return;
+  }
   var newCategory = $('#itemCategory').val();
   var newColor = $('#itemColor').val();
   var newTemp = $('#itemTemp').val();
@@ -202,8 +211,6 @@ function newItemError(err) {
 function handleSuccess(json) {
   user = json;
   userId = user._id;
-  name = json.name;
-  $('#nameHere').append(name + "!");
   renderWardrobeTops(json.wardrobe.tops);
   renderWardrobeBottoms(json.wardrobe.bottoms);
 }
@@ -272,7 +279,7 @@ function onWeatherSuccess(json) {
 }
 
 function onWeatherError() {
-  console.log("Something went wrong. The weather could not be retrieved");
+  $('#weatherText').text("Uh oh, something went wrong. The weather could not be retrieved");
 }
 
 function getRandomForToday(clothesArr) {
@@ -302,6 +309,7 @@ function getRandomForToday(clothesArr) {
       }
     });
   }
+  console.log(todayOptions);
   var randomIndex = (parseInt(Math.random() * todayOptions.length));
   var chosenItem = todayOptions[randomIndex];
   return chosenItem;
