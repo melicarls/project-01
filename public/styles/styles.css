@@ -37,8 +37,8 @@ body {
 
 .logo {
   width: 100px;
-  margin-left: 80%;
-  background: lightpurple;
+  margin-left: 48%;
+  margin-bottom: 10px;
 }
 
 .modal-content {
@@ -63,4 +63,9 @@ h2 {
 
 hr {
   color: darkgrey;
+}
+
+#github {
+  width: 5%;
+  margin-left: 45%;
 }

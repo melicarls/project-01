@@ -5,7 +5,6 @@ var testUsers = [];
 testUsers.push({
   username: "Guest",
   password: "123",
-  name: "Guest User",
   wardrobe: {
     tops: [
       {
