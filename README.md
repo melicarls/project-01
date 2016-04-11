@@ -1,4 +1,7 @@
-App Name
+**Name:**
+##Your OutLook
+======
+
 
 
 **Short explanation of the project**
@@ -50,4 +53,4 @@ This application stores a user's wardrobe with information on the type of weathe
 - Set outfit rules: ex. certain colors that can't be worn together
 
 
-**Screenshot(s)**
+**Screenshots**

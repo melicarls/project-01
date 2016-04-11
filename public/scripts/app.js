@@ -42,7 +42,6 @@ $(document).ready(function() {
 
   $('#randomize').on('click', function(e) {
     e.preventDefault();
-    console.log("Clicked get random outfit");
     var chosenTop = getRandomForToday(user.wardrobe.tops);
     if (chosenTop === undefined) {
       $('#chosenTop').html("<h2>You don't have any appropriate shirts for today's weather. Try entering more wardrobe items.</h2>");
@@ -326,7 +325,6 @@ function getRandomForToday(clothesArr) {
       }
     });
   }
-  console.log(todayOptions);
   var randomIndex = (parseInt(Math.random() * todayOptions.length));
   var chosenItem = todayOptions[randomIndex];
   return chosenItem;
