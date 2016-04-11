@@ -112,31 +112,46 @@ $(document).ready(function() {
 //Trying to set dropdown values when you click on an item
   $('#wardrobeTarget').on('click', '.panel-title', function(e) {
     var item = $(this).closest($('.item'));
-    var itemId = item.data('item-id');
-    console.log(item.data('item-color'));
-    if (item.data('item-color') === "Red") {
-      item.find('.red').addClass('selected');
-    } else if (item.data('item-color') === "Orange") {
-      item.find('.orange').prop('selected', true);
-    } else if (item.data('item-color') === "Yellow") {
-      item.find('.yellow').addClass('selected');
-    } else if (item.data('item-color') === "Green") {
-      item.find('.green').addClass('selected');
-    } else if (item.data('item-color') === "Blue") {
-      item.find('.blue').addClass('selected');
-    } else if (item.data('item-color') === "Purple") {
-      item.find('.purple').addClass('selected');
-    } else if (item.data('item-color') === "White") {
-      item.find('.white').addClass('selected');
-    } else if (item.data('item-color') === "Grey") {
-      item.find('.grey').addClass('selected');
-    } else if (item.data('item-color') === "Black") {
-      item.find('.black').addClass('selected');
-    }
+    setColor(item);
+    setTemp(item);
   });
 
 
 });
+
+
+function setColor(item) {
+  var itemId = item.data('item-id');
+  if (item.data('item-color') === "Red") {
+  item.find($('option.Red')).prop('selected', true);
+  } else if (item.data('item-color') === "Orange") {
+    item.find($('option.Orange')).prop('selected', true);
+  } else if (item.data('item-color') === "Yellow") {
+    item.find($('option.Yellow')).prop('selected', true);
+  } else if (item.data('item-color') === "Green") {
+    item.find($('option.Green')).prop('selected', true);
+  } else if (item.data('item-color') === "Blue") {
+    item.find($('option.Blue')).prop('selected', true);
+  } else if (item.data('item-color') === "Purple") {
+    item.find($('option.Purple')).prop('selected', true);
+  } else if (item.data('item-color') === "White") {
+    item.find($('option.White')).prop('selected', true);
+  } else if (item.data('item-color') === "Grey") {
+    item.find($('option.Grey')).prop('selected', true);
+  } else if (item.data('item-color') === "Black") {
+    item.find($('option.Black')).prop('selected', true);
+  }
+}
+
+function setTemp(item) {
+  if (item.data('item-temp') === "Cold") {
+    item.find($('option.Cold')).prop('selected', true);
+  } else if (item.data('item-temp') === "Mild") {
+    item.find($('option.Mild')).prop('selected', true);
+  } else if (item.data('item-temp') === "Hot") {
+    item.find($('option.Hot')).prop('selected', true);
+  }
+}
 
 function handleLogout() {
   window.location.href = "/login";
@@ -223,6 +238,7 @@ function renderWardrobe(wardrobeObject) {
   var wardrobeTemplate = Handlebars.compile(wardrobeHtml);
   var html = wardrobeTemplate(wardrobeObject);
   $('#wardrobeTarget').prepend(html);
+
 }
 
 function getWeather() {$.ajax({
