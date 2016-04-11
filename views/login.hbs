@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/styles/styles.css">
+
+    <!-- VENDOR SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!-- APPLICATION SCRIPTS -->
+    <script src="./scripts/info.js"></script>
+
     <title>Log In</title>
 
   </head>
@@ -38,8 +46,38 @@
           <li>Username: Guest</li>
           <li>Password: 123</li>
         </ul>
+        <button type="button" id="showInfo" class="btn btn-primary pull-right"><i class="fa fa-question-circle"></i></button>
       </div>
     </div>
+
+    <!-- begin infoModal -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="infoModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </br>
+            <h3 class="modal-title">About OutLook</h3>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>After logging in, enter wardrobe items into the panel to the right using the blue + button.</li>
+              <li>Once you have listed all of your clothes, click "Dress Me!" </li>
+              <li>The application will choose a weather appropriate outfit for you based on projected outdoor temperatures (categorized as cold, mild, or hot), projected rain, and projected wind speeds.</li>
+              <li>Careful! If you haven't entered anything that will fit today's conditions, the app will prompt you to keep putting things into your collection.</li>
+              <li>You can add to, edit, or delete your wardrobe items at any time using the buttons in the wardrobe panel.</li>
+              <li>The page background changes based on the weather, so check back in a few days!</li>
+            </ul>
+            <hr>
+            <p>This application is my first full stack web application, created for the Web Development Immersive course at General Assembly in San Francisco.</p>
+            <a href="https://github.com/melicarls"><img src="/images/github.png" id="github"></a>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><i class="fa fa-arrow-left"></i>    Got it.</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
   </body>
 </html>
