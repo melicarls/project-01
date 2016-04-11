@@ -11,27 +11,29 @@
     <link rel="stylesheet" href="/styles/styles.css">
     <title>Sign Up</title>
   </head>
-  <body>
-    <div class="col-xs-4 col-xs-offset-4">
-      <h2>Sign Up</h2>
-    </div>
-    <br>
-    <form method="POST" action="/signup">
-      <div class="form-group col-xs-4 col-xs-offset-4">
-        <input type="text" name="name" class="form-control" placeholder="Name" autofocus>
+  <body class="backgroundNeeded">
+  </br>
+    <div class="opaque col-xs-4 col-xs-offset-4">
+      <div>
+        <h2>Sign Up</h2>
       </div>
-      <div class="form-group col-xs-4 col-xs-offset-4">
-        <input type="text" name="username" class="form-control" placeholder="Username">
+      <form method="POST" action="/signup">
+        <div class="form-group">
+          <input type="text" name="name" class="form-control" placeholder="Name" autofocus>
+        </div>
+        <div class="form-group">
+          <input type="text" name="username" class="form-control" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-block btn-primary" value="Sign Up">
+        </div>
+      </form>
+      <div>
+        <a href="/login">Already have an account? Sign in here!</a>
       </div>
-      <div class="form-group col-xs-4 col-xs-offset-4">
-        <input type="password" name="password" class="form-control" placeholder="Password">
-      </div>
-      <div class="form-group col-xs-4 col-xs-offset-4">
-        <input type="submit" class="btn btn-block btn-primary" value="Sign Up">
-      </div>
-    </form>
-    <div class="col-xs-4 col-xs-offset-4">
-      <a href="/login">Already have an account? Sign in here!</a>
     </div>
   </body>
 </html>

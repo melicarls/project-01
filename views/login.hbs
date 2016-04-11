@@ -11,35 +11,33 @@
     <link rel="stylesheet" href="/styles/styles.css">
     <title>Log In</title>
   </head>
-  <body>
-
-    <div class="col-xs-4 col-xs-offset-4">
-      <h2>Log In</h2>
-    </div>
-
-    <form method="POST" action="/login">
-      <div class="form-group col-xs-4 col-xs-offset-4">
-        <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+  <body class="backgroundNeeded">
+  </br>
+    <div class="opaque col-xs-4 col-xs-offset-4">
+      <div>
+        <h2>Log In</h2>
       </div>
-      <div class="form-group col-xs-4 col-xs-offset-4">
-        <input type="password" name="password" class="form-control" placeholder="Password">
+      <form method="POST" action="/login">
+        <div class="form-group">
+          <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+        </div>
+        <div class="form-group">
+          <input type="password" name="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <input type="submit" class="btn btn-block btn-primary" value="Log In">
+        </div>
+      </form>
+      <div>
+        <a href="/signup">Sign up here!</a>
       </div>
-      <div class="form-group col-xs-4 col-xs-offset-4">
-        <input type="submit" class="btn btn-block btn-primary" value="Log In">
+      <div>
+        <p>Just want to demo the app? Seed the database and use this login info:</p>
+        <ul>
+          <li>Username: Guest</li>
+          <li>Password: 123</li>
+        </ul>
       </div>
-    </form>
-
-    <div class="col-xs-4 col-xs-offset-4">
-      <a href="/signup">Sign up here!</a>
     </div>
-
-    <div class="col-xs-4 col-xs-offset-4">
-      <p>Just want to demo the app? Seed the database and use this login info:</p>
-      <ul>
-        <li>Username: Guest</li>
-        <li>Password: 123</li>
-      </ul>
-    </div>
-
   </body>
 </html>

@@ -3,6 +3,16 @@ body {
   background-size: 2000px;
 }
 
+.backgroundNeeded {
+  background-image: url("../images/hot-background.jpg")
+}
+
+.opaque {
+  background-color: rgba(255, 255, 255, 0.70);
+  overflow: hidden;
+  border-radius: 10px;
+}
+
 #navBar {
   background-color: rgba(255, 255, 255, 0.70);
   margin: 20px;
@@ -12,6 +22,12 @@ body {
 
 #navBar .btn {
   margin: 10px 5px;
+}
+
+.helpText {
+  background-color: rgba(255, 255, 255, 0.70);
+  padding: 10px 0px;
+  border-radius: 10px;
 }
 
 .panel {
