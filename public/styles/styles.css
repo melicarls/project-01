@@ -34,13 +34,13 @@ h2 {
 }
 
 #tops {
-  height: 350px;
+  max-height: 350px;
   overflow: scroll;
   overflow-x:hidden;
 }
 
 #bottoms {
-  height: 350px;
+  max-height: 350px;
   overflow: scroll;
   overflow-x:hidden;
 }

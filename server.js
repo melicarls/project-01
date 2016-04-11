@@ -15,7 +15,7 @@ var express = require('express');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
-  secret: 'supersecretkey', // change this!
+  secret: 'unicorns',
   resave: false,
   saveUninitialized: false
 }));
@@ -34,48 +34,55 @@ app.set('view engine', 'hbs');
 app.get('/', function (req, res) {
   res.render('index', {user: JSON.stringify(req.user ) + "|| null"});
 });
+
 //Shows signup page
 app.get('/signup', function (req, res) {
+  if (req.user) {
+    return res.redirect('/');
+  }
   res.render('signup');
 });
+
 //Shows login page
 app.get('/login', function (req, res) {
+  if (req.user) {
+    return res.redirect('/');
+  }
   res.render('login');
 });
+
 //Signs up user and logs them in
 app.post('/signup', function (req, res) {
-  User.register(new User({ username: req.body.username }), req.body.password,
+  console.log("Reached signup route and here's the request ", req);
+  console.log("Here's the response", res);
+  var new_user = new User({ username: req.body.username });
+  User.register(new_user, req.body.password,
     function (err, newUser) {
       passport.authenticate('local')(req, res, function() {
+        console.log("Signup success!");
         res.redirect('/');
       });
     }
   );
 });
+
 //Logs in user
-app.post('/login', passport.authenticate('local'), function (req, res) {
-  console.log(req.user);
-  res.redirect('/');
-});
+app.post('/login', passport.authenticate('local', { successRedirect: '/',
+                                                    failureRedirect: '/login'}));
+
 //Logs out users
 app.get('/logout', function (req, res) {
+  console.log("Before logout", req.user);
   req.logout();
+  console.log("After logout", req.user);
   res.redirect('/');
-});
-
-//HTML Endpoint
-app.get('/', function homepage (req, res) {
-  res.sendFile(__dirname + '/views/index.hbs');
 });
 
 //JSON API Endpoints
-
 //API
 app.get('/api', controllers.api.index);
-
 //Show user data
 app.get('/api/users/:user_id', controllers.users.show);
-
 //CRUD wardrobe
 app.post('/api/users/:user_id/items', controllers.items.create);
 app.delete('/api/users/:user_id/items/:item_id', controllers.items.destroy);

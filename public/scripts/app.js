@@ -5,12 +5,29 @@ var feelsLike;
 // These need to default false. They'll be changed to true by get weather success function.
 var isWindy=false;
 var isRainy=false;
-var userId="570bdfdc61fa17007bc4577a";
+var userId;
 var userWardrobe;
 var user;
 
+//Need to get the user ID on login
+//If no user ID, handleError function will redirect to the login page
+
 $(document).ready(function() {
   console.log('app.js loaded!');
+
+  user = window.user;
+  if (user === null) {
+    window.location.href = "/login";
+  } else {
+
+  userId = window.user["_id"];
+
+  $.ajax({
+    method: "GET",
+    url: '/api/users/' + userId,
+    success: handleSuccess,
+    error: handleError,
+  });
 
   $userData = $('#wardrobeTarget');
   var topSource = $('#top-template').html();
@@ -20,12 +37,6 @@ $(document).ready(function() {
 
   getWeather();
 
-  $.ajax({
-    method: "GET",
-    url: '/api/users/' + userId,
-    success: handleSuccess,
-    error: handleError,
-  });
 
   $('.add-item').on('click', function(e) {
     console.log("clicked add item");
@@ -37,12 +48,12 @@ $(document).ready(function() {
   $('#randomize').on('click', function(e) {
     e.preventDefault();
     console.log("Clicked get random outfit");
-    var chosenTop = getRandomForToday(userWardrobe.tops);
+    var chosenTop = getRandomForToday(user.wardrobe.tops);
     if (chosenTop === undefined) {
       $('#chosenTop').html("<h2>You don't have any appropriate shirts for today's weather. Try entering more wardrobe items.</h2>");
       return;
     }
-    var chosenBottom = getRandomForToday(userWardrobe.bottoms);
+    var chosenBottom = getRandomForToday(user.wardrobe.bottoms);
     if (chosenBottom === undefined) {
       $('#chosenBottom').html("<h2>You don't have any appropriate bottoms for today's weather. Try entering more wardrobe items.</h2>");
       return;
@@ -102,8 +113,10 @@ $(document).ready(function() {
     $.ajax ({
       method: 'GET',
       url: "/logout",
-      success: handleLogout(),
+      success: handleLogout,
     });
+
+
   });
 
   $('#showInfo').on('click', function(e) {
@@ -116,6 +129,7 @@ $(document).ready(function() {
     setDropdowns(item);
   });
 
+}
 
 });
 
@@ -187,7 +201,8 @@ function newItemError(err) {
 
 function handleSuccess(json) {
   user = json;
-  name = json.username;
+  userId = user._id;
+  name = json.name;
   $('#nameHere').append(name + "!");
   renderWardrobeTops(json.wardrobe.tops);
   renderWardrobeBottoms(json.wardrobe.bottoms);
