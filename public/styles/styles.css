@@ -4,7 +4,8 @@ body {
 }
 
 .backgroundNeeded {
-  background-image: url("../images/hot-background.jpg")
+  background-image: url("../images/hot-background.jpg");
+  background-size: 2000px;
 }
 
 .opaque {
