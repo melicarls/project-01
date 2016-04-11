@@ -7,7 +7,6 @@ var Item = require('./item.js');
 var UserSchema = new Schema ({
   username: String,
   password: String,
-  name: String,
   wardrobe: {
     tops: [ Item.schema ],
     bottoms: [ Item.schema ],

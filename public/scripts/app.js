@@ -6,12 +6,7 @@ var feelsLike;
 var isWindy=false;
 var isRainy=false;
 var userId;
-var name;
-var userWardrobe;
 var user;
-
-//Need to get the user ID on login
-//If no user ID, handleError function will redirect to the login page
 
 $(document).ready(function() {
   console.log('app.js loaded!');
@@ -21,9 +16,8 @@ $(document).ready(function() {
     window.location.href = "/login";
   } else {
 
-  name = window.user["username"];
-  $('#nameHere').append(name + "!");
-  userId = window.user["_id"];
+    userId = window.user["_id"];
+  $('#nameHere').append((window.user["username"]) + "!");
 
   $.ajax({
     method: "GET",
@@ -145,8 +139,10 @@ function handleLogout() {
 function handleItemUpdate(json) {
   if (json.category === "Top") {
     renderWardrobeTops( [json] );
+    user.wardrobe.tops.push(json);
   } else {
     renderWardrobeBottoms( [json] );
+    user.wardrobe.bottoms.push(json);
   }
 }
 
@@ -199,8 +195,10 @@ function newItemSuccess(json) {
   $('#addModal').modal('hide');
   if (json.category === "Top") {
     renderWardrobeTops( [json] );
+    user.wardrobe.tops.push(json);
   } else {
     renderWardrobeBottoms( [json] );
+    user.wardrobe.bottoms.push(json);
   }
 }
 
