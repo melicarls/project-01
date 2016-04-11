@@ -92,7 +92,7 @@
             <div id="tops">
               <div id="newTop">
                 \{{#each tops}}
-                <div class="item" data-item-id=\{{_id}} data-item-description=\{{description}} data-item-color=\{{color}} data-item-temp=\{{temp}} data-item-inWind=\{{inWind}} data-item-inRain=\{{inRain}}>
+                <div class="item" data-item-id=\{{_id}} data-item-description=\{{description}} data-item-color=\{{color}} data-item-temp=\{{temp}} data-item-inwind=\{{inWind}} data-item-inrain=\{{inRain}}>
                   <div id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="heading\{{_id}}">
@@ -106,7 +106,7 @@
                         <div class="form-group">
                           <label class="control-label" for="editDescription">New description:</label>
                           <div>
-                            <input id="editDescription\{{_id}}" name="editDescription" type="text" class="form-control input-md" value="\{{description}}" required>
+                            <input id="editDescription\{{_id}}" name="editDescription" type="text" class="form-control input-md" value="\{{description}}" required="required">
                           </div>
                         </div>
                         <div class="form-group">
@@ -133,13 +133,13 @@
                         </div>
                         <div class="checkbox">
                           <label class="control-label" for="editInWind">
-                            <input id="editInWind\{{_id}}" name="editInWind" type="checkbox" class="form-control" value=\{{inWind}}>
+                            <input id="editInWind\{{_id}}" name="editInWind" type="checkbox" class="form-control inwind" value=\{{inWind}}>
                             Wearable in wind?
                           </label>
                         </div>
                         <div class="checkbox">
                           <label class="control-label" for="editInRain">
-                            <input id="editInRain\{{_id}}" name="editInRain" type="checkbox" class="form-control" value=\{{inRain}}>
+                            <input id="editInRain\{{_id}}" name="editInRain" type="checkbox" class="form-control inrain" value=\{{inRain}}>
                             Wearable in rain?
                           </label>
                         </div>
@@ -159,7 +159,7 @@
             <div id="bottoms">
               <div id="newBottom">
                 \{{#each bottoms}}
-                <div class="item" data-item-id=\{{_id}}>
+                <div class="item" data-item-id=\{{_id}} data-item-description=\{{description}} data-item-color=\{{color}} data-item-temp=\{{temp}} data-item-inwind=\{{inWind}} data-item-inrain=\{{inRain}}>
                   <div id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="heading\{{_id}}">
@@ -173,7 +173,7 @@
                         <div class="form-group">
                           <label class="control-label" for="editDescription">New description:</label>
                           <div>
-                            <input id="editDescription\{{_id}}" name="editDescription" type="text" class="form-control input-md" value="\{{description}}" required>
+                            <input id="editDescription\{{_id}}" name="editDescription" type="text" class="form-control input-md" value="\{{description}}" required="required">
                           </div>
                         </div>
                         <div class="form-group">
@@ -193,20 +193,20 @@
                         <div class="form-group">
                           <label class="control-label" for="editTemp">Temperature:</label>
                           <select class="form-control" id="editTemp\{{_id}}" value=\{{temp}}>
-                            <option>Hot</option>
-                            <option>Mild</option>
-                            <option>Cold</option>
+                            <option value="Hot">Hot</option>
+                            <option value="Mild">Mild</option>
+                            <option value="Cold">Cold</option>
                           </select>
                         </div>
                         <div class="checkbox">
                           <label class="control-label" for="editInWind">
-                            <input id="editInWind\{{_id}}" name="editInWind" type="checkbox" class="form-control" value=\{{inWind}}>
+                            <input id="editInWind\{{_id}}" name="editInWind" type="checkbox" class="checkbox form-control inwind" value=\{{inWind}}>
                             Wearable in wind?
                           </label>
                         </div>
                         <div class="checkbox">
                           <label class="control-label" for="editInRain">
-                            <input id="editInRain\{{_id}}" name="editInRain" type="checkbox" class="form-control" value=\{{inRain}}>
+                            <input id="editInRain\{{_id}}" name="editInRain" type="checkbox" class=" checkbox form-control inrain" value=\{{inRain}}>
                             Wearable in rain?
                           </label>
                         </div>

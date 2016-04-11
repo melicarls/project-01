@@ -1,9 +1,10 @@
 
 var weatherEndpoint = "http://api.wunderground.com/api/4fefd5989e452ef5/forecast/q/CA/San_Francisco.json";
 var template;
-var feelsLike = "Cold";
+var feelsLike = "Mild";
+// These need to default false. They'll be changed to true by get weather success function.
 var isWindy=false;
-var isRainy=true;
+var isRainy=false;
 var userId="570ad3a1b7fe0edf610662a9";
 var userWardrobe;
 var user;
@@ -14,7 +15,7 @@ $(document).ready(function() {
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  // getWeather();
+  getWeather();
 
   $.ajax({
     method: "GET",
@@ -22,8 +23,6 @@ $(document).ready(function() {
     success: handleSuccess,
     error: handleError,
   });
-
-  changeBackground(feelsLike, isRainy);
 
   $('.add-item').on('click', function(e) {
     console.log("clicked add item");
@@ -109,49 +108,17 @@ $(document).ready(function() {
     $('#infoModal').modal('show');
   });
 
-//Trying to set dropdown values when you click on an item
   $('#wardrobeTarget').on('click', '.panel-title', function(e) {
     var item = $(this).closest($('.item'));
     setColor(item);
     setTemp(item);
+    setWind(item);
+    setRain(item);
   });
 
 
 });
 
-
-function setColor(item) {
-  var itemId = item.data('item-id');
-  if (item.data('item-color') === "Red") {
-  item.find($('option.Red')).prop('selected', true);
-  } else if (item.data('item-color') === "Orange") {
-    item.find($('option.Orange')).prop('selected', true);
-  } else if (item.data('item-color') === "Yellow") {
-    item.find($('option.Yellow')).prop('selected', true);
-  } else if (item.data('item-color') === "Green") {
-    item.find($('option.Green')).prop('selected', true);
-  } else if (item.data('item-color') === "Blue") {
-    item.find($('option.Blue')).prop('selected', true);
-  } else if (item.data('item-color') === "Purple") {
-    item.find($('option.Purple')).prop('selected', true);
-  } else if (item.data('item-color') === "White") {
-    item.find($('option.White')).prop('selected', true);
-  } else if (item.data('item-color') === "Grey") {
-    item.find($('option.Grey')).prop('selected', true);
-  } else if (item.data('item-color') === "Black") {
-    item.find($('option.Black')).prop('selected', true);
-  }
-}
-
-function setTemp(item) {
-  if (item.data('item-temp') === "Cold") {
-    item.find($('option.Cold')).prop('selected', true);
-  } else if (item.data('item-temp') === "Mild") {
-    item.find($('option.Mild')).prop('selected', true);
-  } else if (item.data('item-temp') === "Hot") {
-    item.find($('option.Hot')).prop('selected', true);
-  }
-}
 
 function handleLogout() {
   window.location.href = "/login";
@@ -279,9 +246,7 @@ function onWeatherSuccess(json) {
   $('#fourthForecast').text(json.forecast.txt_forecast.forecastday[4].fcttext);
   $('#fifthTitle').text(json.forecast.txt_forecast.forecastday[5].title);
   $('#fifthForecast').text(json.forecast.txt_forecast.forecastday[5].fcttext);
-  console.log("Feels like", feelsLike);
-  console.log("Rainy", isRainy);
-  console.log("Windy", isWindy);
+  changeBackground(feelsLike, isRainy);
 }
 
 function onWeatherError() {
@@ -330,6 +295,55 @@ function changeBackground(currentWeather, currentRain) {
     document.body.style.backgroundImage = 'url(./images/mild-background.jpg)';
   } else if (currentWeather === "Hot") {
     document.body.style.backgroundImage = 'url(./images/hot-background.jpg)';
+  }
+}
+
+function setColor(item) {
+  var itemId = item.data('item-id');
+  if (item.data('item-color') === "Red") {
+  item.find($('option.Red')).prop('selected', true);
+  } else if (item.data('item-color') === "Orange") {
+    item.find($('option.Orange')).prop('selected', true);
+  } else if (item.data('item-color') === "Yellow") {
+    item.find($('option.Yellow')).prop('selected', true);
+  } else if (item.data('item-color') === "Green") {
+    item.find($('option.Green')).prop('selected', true);
+  } else if (item.data('item-color') === "Blue") {
+    item.find($('option.Blue')).prop('selected', true);
+  } else if (item.data('item-color') === "Purple") {
+    item.find($('option.Purple')).prop('selected', true);
+  } else if (item.data('item-color') === "White") {
+    item.find($('option.White')).prop('selected', true);
+  } else if (item.data('item-color') === "Grey") {
+    item.find($('option.Grey')).prop('selected', true);
+  } else if (item.data('item-color') === "Black") {
+    item.find($('option.Black')).prop('selected', true);
+  }
+}
+
+function setTemp(item) {
+  if (item.data('item-temp') === "Cold") {
+    item.find($('option.Cold')).prop('selected', true);
+  } else if (item.data('item-temp') === "Mild") {
+    item.find($('option.Mild')).prop('selected', true);
+  } else if (item.data('item-temp') === "Hot") {
+    item.find($('option.Hot')).prop('selected', true);
+  }
+}
+
+function setWind(item) {
+  if (item.data('item-inwind') === true) {
+    item.find($('input.inwind')).prop('checked', true);
+  } else if (item.data('item-inwind') === false) {
+    item.find($('input.inwind')).prop('checked', false);
+  }
+}
+
+function setRain(item) {
+  if (item.data('item-inrain') === true) {
+    item.find($('input.inrain')).prop('checked', true);
+  } else if (item.data('item-inrain') === false) {
+    item.find($('input.inrain')).prop('checked', false);
   }
 }
 
