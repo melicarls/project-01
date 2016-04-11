@@ -3,7 +3,7 @@ var db = require("./models");
 var testUsers = [];
 
 testUsers.push({
-  username: "test",
+  username: "Guest",
   password: "123",
   name: "Tester",
   wardrobe: {},

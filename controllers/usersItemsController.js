@@ -99,9 +99,26 @@ function update(req, res) {
   });
 }
 
+function show(req, res) {
+  console.log("Reached show item route");
+  db.User.findById(req.params.user_id, function(err, foundUser) {
+    foundUser.wardrobe.tops.forEach(function (el, i, arr) {
+      if (el._id == req.params.item_id) {
+        res.send(el);
+      }
+    });
+    foundUser.wardrobe.bottoms.forEach(function (el, i, arr) {
+      if (el._id == req.params.item_id) {
+        res.send(el);
+      }
+    });
+  });
+}
+
 //Public exports go here
 module.exports = {
   create: create,
   destroy: destroy,
   update: update,
+  show: show,
 };

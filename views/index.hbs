@@ -38,7 +38,8 @@
 
       <div id="temperature" class="col-md-3 panel">
         <h2>Weather</h2>
-        <h3>Now planning for</h3><h4 id="dateText"></h4><h4>in San Francisco, CA. </h4>
+        <hr>
+        <h3>Now planning for</h3><h4 id="dateText"> in San Francisco, CA. </h4>
         <h3>The weather will be: </h3>
         <h4 id="weatherText"></h4>
         <div id="weatherIcon" class="col-md-4">
@@ -75,6 +76,7 @@
 
       <div id="avatar" class="col-md-4 panel">
         <h2>Wear this!</h2>
+        <hr>
         <div id="chosenTop"></div>
         <div id="chosenBottom"></div>
         <div id="comment"></div>
@@ -82,6 +84,7 @@
 
       <div id="wardrobe" class="col-md-4 panel">
         <h2>Wardrobe</h2>
+        <hr>
         <!--Start Handlebars-->
         <div id="wardrobeTarget">
           <script id = "wardrobe-template" type="text/x-handlebars-template">
@@ -89,7 +92,7 @@
             <div id="tops">
               <div id="newTop">
                 \{{#each tops}}
-                <div class="item" data-item-id=\{{_id}}>
+                <div class="item" data-item-id=\{{_id}} data-item-description=\{{description}} data-item-color=\{{color}} data-item-temp=\{{temp}} data-item-inWind=\{{inWind}} data-item-inRain=\{{inRain}}>
                   <div id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="heading\{{_id}}">
@@ -108,16 +111,16 @@
                         </div>
                         <div class="form-group">
                           <label class="control-label" for="editColor">Item color:</label>
-                          <select class="form-control" id="editColor\{{_id}}" value="\{{color}}">
-                            <option value="Red">Red</option>
-                            <option value="Orange">Orange</option>
-                            <option value="Yellow">Yellow</option>
-                            <option value="Green">Green</option>
-                            <option value="Blue">Blue</option>
-                            <option value="Purple">Purple</option>
-                            <option value="White">White</option>
-                            <option value="Grey">Grey</option>
-                            <option value="Black">Black</option>
+                          <select class="form-control colorPick" id="editColor\{{_id}}" value="\{{color}}">
+                            <option class="Red">Red</option>
+                            <option class="Orange">Orange</option>
+                            <option class="Yellow">Yellow</option>
+                            <option class="Green">Green</option>
+                            <option class="Blue">Blue</option>
+                            <option class="Purple">Purple</option>
+                            <option class="White">White</option>
+                            <option class="Grey">Grey</option>
+                            <option class="Black">Black</option>
                           </select>
                         </div>
                         <div class="form-group">
@@ -151,6 +154,7 @@
                 \{{/each}}
               </div>
             </div>
+            <hr>
             <h4>Bottoms</h4>
             <div id="bottoms">
               <div id="newBottom">

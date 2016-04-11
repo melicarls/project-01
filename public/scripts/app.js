@@ -14,7 +14,7 @@ $(document).ready(function() {
   var source = $('#wardrobe-template').html();
   template = Handlebars.compile(source);
 
-  getWeather();
+  // getWeather();
 
   $.ajax({
     method: "GET",
@@ -109,10 +109,32 @@ $(document).ready(function() {
     $('#infoModal').modal('show');
   });
 
-  $('#wardrobeTarget').on('click', $('.item'), function(e) {
-    e.preventDefault();
-    var itemId = $('.item').data('item-id');
+//Trying to set dropdown values when you click on an item
+  $('#wardrobeTarget').on('click', '.panel-title', function(e) {
+    var item = $(this).closest($('.item'));
+    var itemId = item.data('item-id');
+    console.log(item.data('item-color'));
+    if (item.data('item-color') === "Red") {
+      item.find('.red').addClass('selected');
+    } else if (item.data('item-color') === "Orange") {
+      item.find('.orange').prop('selected', true);
+    } else if (item.data('item-color') === "Yellow") {
+      item.find('.yellow').addClass('selected');
+    } else if (item.data('item-color') === "Green") {
+      item.find('.green').addClass('selected');
+    } else if (item.data('item-color') === "Blue") {
+      item.find('.blue').addClass('selected');
+    } else if (item.data('item-color') === "Purple") {
+      item.find('.purple').addClass('selected');
+    } else if (item.data('item-color') === "White") {
+      item.find('.white').addClass('selected');
+    } else if (item.data('item-color') === "Grey") {
+      item.find('.grey').addClass('selected');
+    } else if (item.data('item-color') === "Black") {
+      item.find('.black').addClass('selected');
+    }
   });
+
 
 });
 
@@ -213,7 +235,7 @@ function getWeather() {$.ajax({
 
 function onWeatherSuccess(json) {
   $('#weatherText').text(json.forecast.txt_forecast.forecastday[0].fcttext);
-  $('#dateText').text(json.forecast.txt_forecast.forecastday[0].title);
+  $('#dateText').prepend(json.forecast.txt_forecast.forecastday[0].title);
   $('#weatherIcon').html('<img src=' + json.forecast.txt_forecast.forecastday[0].icon_url + '>');
   todayTemp = parseInt(json.forecast.simpleforecast.forecastday[0].high.fahrenheit);
   if (todayTemp < 50) {
@@ -241,6 +263,9 @@ function onWeatherSuccess(json) {
   $('#fourthForecast').text(json.forecast.txt_forecast.forecastday[4].fcttext);
   $('#fifthTitle').text(json.forecast.txt_forecast.forecastday[5].title);
   $('#fifthForecast').text(json.forecast.txt_forecast.forecastday[5].fcttext);
+  console.log("Feels like", feelsLike);
+  console.log("Rainy", isRainy);
+  console.log("Windy", isWindy);
 }
 
 function onWeatherError() {
@@ -293,6 +318,6 @@ function changeBackground(currentWeather, currentRain) {
 }
 
 var addHtmlFirst='<div class="item"><div id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse" aria-expanded="false" aria-controls="collapse">';
-var addHtmlSecond='</a></h4></div><div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading"><div class="form-group"><label class="control-label" for="editDescription">New description:</label><div><input id="editDescription" name="editDescription" type="text" class="form-control input-md" required></div></div><div class="form-group"><label class="control-label" for="editColor">Item color:</labelselect class="form-control" id="editColor">  <option value="Red">Red</option>  <option value="Orange">Orange</option>  <option value="Yellow">Yellow</option>  <option value="Green">Green</option>  <option value="Blue">Blue</option><option value="Purple">Purple</option></div><div class="form-group"><label class="control-label" for="editTemp">Temperature:</label><select class="form-control" id="editTemp"><option>Hot</option><option>Mild</option><option>Cold</option></select></div><div class="checkbox"><label class="control-label" for="editInWind"><input id="editInWind" name="editInWind" type="checkbox" class="form-control">Wearable in wind?</label></div><div class="checkbox"><label class="control-label" for="editInRain"><input id="editInRain" name="editInRain" type="checkbox" class="form-control">  Wearable in rain?</label><div><div class="text-right"><button type="button" class="btn btn-info editButton" data-item-id="';
+var addHtmlSecond='</a></h4></div><div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading"><div class="form-group"><label class="control-label" for="editDescription">New description:</label><div><input id="editDescription" name="editDescription" type="text" class="form-control input-md" required></div></div><div class="form-group"><label class="control-label" for="editColor">Item color:</labelselect class="form-control" id="editColor">  <option value="Red">Red</option>  <option value="Orange">Orange</option><option value="Yellow">Yellow</option><option value="Green">Green</option><option value="Blue">Blue</option><option value="Purple">Purple</option></div><div class="form-group"><label class="control-label" for="editTemp">Temperature:</label><select class="form-control" id="editTemp"><option>Hot</option><option>Mild</option><option>Cold</option></select></div><div class="checkbox"><label class="control-label" for="editInWind"><input id="editInWind" name="editInWind" type="checkbox" class="form-control">Wearable in wind?</label></div><div class="checkbox"><label class="control-label" for="editInRain"><input id="editInRain" name="editInRain" type="checkbox" class="form-control">Wearable in rain?</label><div><div class="text-right"><button type="button" class="btn btn-info editButton" data-item-id="';
 var addHtmlThird='"><i class="fa fa-pencil"></i></button><button type="button" class="btn btn-danger deleteButton" data-item-id="';
 var addHtmlFourth='"><i class="fa fa-ban"></i></button></div></div></div></div></div>;';
