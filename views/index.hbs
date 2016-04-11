@@ -87,12 +87,11 @@
         <hr>
         <!--Start Handlebars-->
         <div id="wardrobeTarget">
-          <script id = "wardrobe-template" type="text/x-handlebars-template">
             <h4>Tops</h4>
             <div id="tops">
+              <script id = "top-template" type="text/x-handlebars-template">
               <div id="newTop">
-                \{{#each tops}}
-                <div class="item" data-item-id=\{{_id}} data-item-description=\{{description}} data-item-color=\{{color}} data-item-temp=\{{temp}} data-item-inwind=\{{inWind}} data-item-inrain=\{{inRain}}>
+                <div class="item" data-item-id=\{{_id}} data-item-description=\"{{description}}" data-item-color=\{{color}} data-item-temp=\{{temp}} data-item-inwind=\{{inWind}} data-item-inrain=\{{inRain}}>
                   <div id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="heading\{{_id}}">
@@ -151,15 +150,15 @@
                     </div>
                   </div>
                 </div>
-                \{{/each}}
               </div>
+            </script>
             </div>
             <hr>
             <h4>Bottoms</h4>
             <div id="bottoms">
+              <script id = "bottom-template" type="text/x-handlebars-template">
               <div id="newBottom">
-                \{{#each bottoms}}
-                <div class="item" data-item-id=\{{_id}} data-item-description=\{{description}} data-item-color=\{{color}} data-item-temp=\{{temp}} data-item-inwind=\{{inWind}} data-item-inrain=\{{inRain}}>
+                <div class="item" data-item-id=\{{_id}}  data-item-color=\{{color}} data-item-temp=\{{temp}} data-item-inwind=\{{inWind}} data-item-inrain=\{{inRain}}>
                   <div id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="heading\{{_id}}">
@@ -218,10 +217,9 @@
                     </div>
                   </div>
                 </div>
-                \{{/each}}
               </div>
+            </script>
             </div>
-          </script>
         </div>
         <!--End Handlebars-->
         <button class='btn btn-primary add-item'><i class="fa fa-plus"></i></button>

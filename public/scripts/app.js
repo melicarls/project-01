@@ -11,9 +11,12 @@ var user;
 
 $(document).ready(function() {
   console.log('app.js loaded!');
+
   $userData = $('#wardrobeTarget');
-  var source = $('#wardrobe-template').html();
-  template = Handlebars.compile(source);
+  var topSource = $('#top-template').html();
+  topTemplate = Handlebars.compile(topSource);
+  var bottomSource = $('#bottom-template').html();
+  bottomTemplate = Handlebars.compile(bottomSource);
 
   getWeather();
 
@@ -110,26 +113,21 @@ $(document).ready(function() {
 
   $('#wardrobeTarget').on('click', '.panel-title', function(e) {
     var item = $(this).closest($('.item'));
-    setColor(item);
-    setTemp(item);
-    setWind(item);
-    setRain(item);
+    setDropdowns(item);
   });
 
 
 });
-
 
 function handleLogout() {
   window.location.href = "/login";
 }
 
 function handleItemUpdate(json) {
-  var toAdd = addHtmlFirst + json.description + addHtmlSecond + json._id + addHtmlThird + json._id + addHtmlFourth;
   if (json.category === "Top") {
-    $('#newTop').append(toAdd);
-  } else if (json.category === "Bottom") {
-    $('#newBottom').append(toAdd);
+    renderWardrobeTops( [json] );
+  } else {
+    renderWardrobeBottoms( [json] );
   }
 }
 
@@ -176,11 +174,10 @@ function newItemSuccess(json) {
   $('#itemColor').val('');
   $('#itemTemp').val('');
   $('#addModal').modal('hide');
-  var toAdd = addHtmlFirst + json.description + addHtmlSecond + json._id + addHtmlThird + json._id + addHtmlFourth;
   if (json.category === "Top") {
-    $('#newTop').append(toAdd);
-  } else if (json.category === "Bottom") {
-    $('#newBottom').append(toAdd);
+    renderWardrobeTops( [json] );
+  } else {
+    renderWardrobeBottoms( [json] );
   }
 }
 
@@ -192,20 +189,30 @@ function handleSuccess(json) {
   user = json;
   name = json.username;
   $('#nameHere').append(name + "!");
-  userWardrobe = json.wardrobe;
-  renderWardrobe(userWardrobe);
+  renderWardrobeTops(json.wardrobe.tops);
+  renderWardrobeBottoms(json.wardrobe.bottoms);
 }
 
 function handleError() {
   console.log("There was an error rendering the user's data");
 }
 
-function renderWardrobe(wardrobeObject) {
-  var wardrobeHtml = $('#wardrobe-template').html();
+function renderWardrobeTops(wardrobeArray) {
+  wardrobeArray.forEach(function (el, i, arr) {
+  var wardrobeHtml = $('#top-template').html();
   var wardrobeTemplate = Handlebars.compile(wardrobeHtml);
-  var html = wardrobeTemplate(wardrobeObject);
-  $('#wardrobeTarget').prepend(html);
+  var html = wardrobeTemplate(el);
+  $('#tops').append(html);
+  });
+}
 
+function renderWardrobeBottoms(wardrobeArray) {
+  wardrobeArray.forEach(function (el, i, arr) {
+  var wardrobeHtml = $('#bottom-template').html();
+  var wardrobeTemplate = Handlebars.compile(wardrobeHtml);
+  var html = wardrobeTemplate(el);
+  $('#bottoms').append(html);
+  });
 }
 
 function getWeather() {$.ajax({
@@ -298,6 +305,13 @@ function changeBackground(currentWeather, currentRain) {
   }
 }
 
+function setDropdowns(item) {
+  setColor(item);
+  setTemp(item);
+  setWind(item);
+  setRain(item);
+}
+
 function setColor(item) {
   var itemId = item.data('item-id');
   if (item.data('item-color') === "Red") {
@@ -346,8 +360,3 @@ function setRain(item) {
     item.find($('input.inrain')).prop('checked', false);
   }
 }
-
-var addHtmlFirst='<div class="item"><div id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse" aria-expanded="false" aria-controls="collapse">';
-var addHtmlSecond='</a></h4></div><div id="collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading"><div class="form-group"><label class="control-label" for="editDescription">New description:</label><div><input id="editDescription" name="editDescription" type="text" class="form-control input-md" required></div></div><div class="form-group"><label class="control-label" for="editColor">Item color:</labelselect class="form-control" id="editColor">  <option value="Red">Red</option>  <option value="Orange">Orange</option><option value="Yellow">Yellow</option><option value="Green">Green</option><option value="Blue">Blue</option><option value="Purple">Purple</option></div><div class="form-group"><label class="control-label" for="editTemp">Temperature:</label><select class="form-control" id="editTemp"><option>Hot</option><option>Mild</option><option>Cold</option></select></div><div class="checkbox"><label class="control-label" for="editInWind"><input id="editInWind" name="editInWind" type="checkbox" class="form-control">Wearable in wind?</label></div><div class="checkbox"><label class="control-label" for="editInRain"><input id="editInRain" name="editInRain" type="checkbox" class="form-control">Wearable in rain?</label><div><div class="text-right"><button type="button" class="btn btn-info editButton" data-item-id="';
-var addHtmlThird='"><i class="fa fa-pencil"></i></button><button type="button" class="btn btn-danger deleteButton" data-item-id="';
-var addHtmlFourth='"><i class="fa fa-ban"></i></button></div></div></div></div></div>;';
