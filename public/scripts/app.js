@@ -1,11 +1,11 @@
 
 var weatherEndpoint = "https://api.wunderground.com/api/4fefd5989e452ef5/forecast/q/CA/San_Francisco.json";
 var template;
-var feelsLike = "Mild";
+var feelsLike;
 // These need to default false. They'll be changed to true by get weather success function.
 var isWindy=false;
 var isRainy=false;
-var userId="570ad3a1b7fe0edf610662a9";
+var userId="570bdfdc61fa17007bc4577a";
 var userWardrobe;
 var user;
 
