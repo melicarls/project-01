@@ -74,7 +74,6 @@ $(document).ready(function() {
 
   //Edit item
   $('#wardrobeTarget').on('click', '.editButton', function(e) {
-    console.log("clicked an edit icon");
     e.preventDefault();
     var $thisButton = $(this);
     var itemId = $thisButton.data('item-id');
@@ -86,9 +85,29 @@ $(document).ready(function() {
     var newCat = $thisButton.data('cat');
     var newColor = $('#editColor'+itemId).val();
     var newTemp = $('#editTemp'+itemId).val();
-    var newInWind = $('#editInWind'+itemId).val();
-    var newInRain = $('#editInRain'+itemId).val();
+    var newInWind = false;
+    if ($('#editInWind'+itemId).is(':checked')) {
+      newInWind = true;
+    }
+    var newInRain = false;
+    if ($('#editInRain'+itemId).is(':checked')) {
+      newInRain = true;
+    }
     $thisButton.closest(".item").html("");
+    // This if statement removes the top from the array that the "Get Outfit" button references
+    if ($thisButton.data('cat') === "Top") {
+      user.wardrobe.tops.forEach(function (el, i, arr) {
+        if (el["_id"] === itemId) {
+          arr.splice(i, 1);
+        }
+      });
+    } else if ($thisButton.data('cat') === "Bottom") {
+      user.wardrobe.tops.forEach(function (el, i, arr) {
+        if (el["_id"] === itemId) {
+          arr.splice(i, 1);
+        }
+      });
+    }
     var sendThis = {
       description: newDesc,
       category: newCat,
