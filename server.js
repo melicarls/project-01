@@ -35,7 +35,6 @@ app.get('/', function (req, res) {
   res.render('index', {user: JSON.stringify(req.user ) + "|| null"});
 });
 
-//Shows signup page
 app.get('/signup', function (req, res) {
   if (req.user) {
     return res.redirect('/');
@@ -43,7 +42,6 @@ app.get('/signup', function (req, res) {
   res.render('signup');
 });
 
-//Shows login page
 app.get('/login', function (req, res) {
   if (req.user) {
     return res.redirect('/');
@@ -51,7 +49,6 @@ app.get('/login', function (req, res) {
   res.render('login');
 });
 
-//Signs up user and logs them in
 app.post('/signup', function (req, res) {
   console.log("Reached signup route and here's the request ", req);
   console.log("Here's the response", res);
@@ -66,15 +63,12 @@ app.post('/signup', function (req, res) {
   );
 });
 
-//Logs in user
 app.post('/login', passport.authenticate('local', { successRedirect: '/',
                                                     failureRedirect: '/login'}));
 
 //Logs out users
 app.get('/logout', function (req, res) {
-  console.log("Before logout", req.user);
   req.logout();
-  console.log("After logout", req.user);
   res.redirect('/');
 });
 

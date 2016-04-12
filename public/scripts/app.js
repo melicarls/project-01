@@ -9,7 +9,6 @@ var userId;
 var user;
 
 $(document).ready(function() {
-  console.log('app.js loaded!');
 
   user = window.user;
   if (user === null) {

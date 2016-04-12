@@ -24,10 +24,7 @@ function create(req, res) {
 function destroy(req, res) {
   db.User.findById(req.params.user_id, function(err, foundUser) {
     foundUser.wardrobe.tops.forEach(function (el, i, arr) {
-      console.log("Element", el._id);
-      console.log("Params", req.params.item_id);
       if (el._id == req.params.item_id) {
-        console.log("Got one!");
         el.remove();
         foundUser.save(function(err, saved) {
           if (err) {
@@ -54,15 +51,9 @@ function destroy(req, res) {
 }
 
 function update(req, res) {
-  console.log("Reached update route");
   db.User.findById(req.params.user_id, function(err, foundUser) {
-    console.log("Request", req);
-    console.log("User", foundUser);
     foundUser.wardrobe.tops.forEach(function (el, i, arr) {
-      console.log("Element", el._id);
-      console.log("Params", req.params.item_id);
       if (el._id == req.params.item_id) {
-        console.log("Found the item to update!");
         el.description = req.body.description;
         el.category = req.body.category;
         el.color = req.body.color;
@@ -80,7 +71,6 @@ function update(req, res) {
     });
     foundUser.wardrobe.bottoms.forEach(function (el, i, arr) {
       if (el._id == req.params.item_id) {
-        console.log("Found the item to update!");
         el.description = req.body.description;
         el.category = req.body.category;
         el.color = req.body.color;
@@ -100,7 +90,6 @@ function update(req, res) {
 }
 
 function show(req, res) {
-  console.log("Reached show item route");
   db.User.findById(req.params.user_id, function(err, foundUser) {
     foundUser.wardrobe.tops.forEach(function (el, i, arr) {
       if (el._id == req.params.item_id) {
