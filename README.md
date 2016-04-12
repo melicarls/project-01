@@ -1,6 +1,5 @@
-**Name:**
 ##Today's OutLook
-======
+------
 
 **Short explanation of the project**
 
