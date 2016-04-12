@@ -75,3 +75,15 @@ hr {
 .add-item {
   margin-bottom: 10px;
 }
+
+.topLogo {
+  max-width: 250px;
+  display: block;
+  margin: 0 auto;
+}
+
+.indexLogo {
+  max-width: 250px;
+  float: left;
+  margin-top: -35px;
+}
