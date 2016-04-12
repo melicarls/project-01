@@ -1,5 +1,5 @@
 **Name:**
-##Your OutLook
+##Today's OutLook
 ======
 
 
@@ -54,3 +54,6 @@ This application stores a user's wardrobe with information on the type of weathe
 
 
 **Screenshots**
+![alt text](/screenshots/log-in.png "Log In Screen")
+![alt text](/screenshots/main.png "Main Screen")
+![alt text](/screenshots/collapse-open.png "Edit Menu Open")
