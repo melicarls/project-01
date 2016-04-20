@@ -350,36 +350,13 @@ function setDropdowns(item) {
 }
 
 function setColor(item) {
-  var itemId = item.data('item-id');
-  if (item.data('item-color') === "Red") {
-  item.find($('option.Red')).prop('selected', true);
-  } else if (item.data('item-color') === "Orange") {
-    item.find($('option.Orange')).prop('selected', true);
-  } else if (item.data('item-color') === "Yellow") {
-    item.find($('option.Yellow')).prop('selected', true);
-  } else if (item.data('item-color') === "Green") {
-    item.find($('option.Green')).prop('selected', true);
-  } else if (item.data('item-color') === "Blue") {
-    item.find($('option.Blue')).prop('selected', true);
-  } else if (item.data('item-color') === "Purple") {
-    item.find($('option.Purple')).prop('selected', true);
-  } else if (item.data('item-color') === "White") {
-    item.find($('option.White')).prop('selected', true);
-  } else if (item.data('item-color') === "Grey") {
-    item.find($('option.Grey')).prop('selected', true);
-  } else if (item.data('item-color') === "Black") {
-    item.find($('option.Black')).prop('selected', true);
-  }
+  var color = item.data('item-color');
+  item.find('option.' + color).prop('selected', true);
 }
 
 function setTemp(item) {
-  if (item.data('item-temp') === "Cold") {
-    item.find($('option.Cold')).prop('selected', true);
-  } else if (item.data('item-temp') === "Mild") {
-    item.find($('option.Mild')).prop('selected', true);
-  } else if (item.data('item-temp') === "Hot") {
-    item.find($('option.Hot')).prop('selected', true);
-  }
+  var temp = item.data('item-temp');
+  item.find('option.' + temp).prop('selected', true);
 }
 
 function setWind(item) {
